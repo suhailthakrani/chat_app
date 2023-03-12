@@ -1,0 +1,67 @@
+import 'package:chat_app/common/routes/names.dart';
+import 'package:chat_app/common/routes/observers.dart';
+import 'package:chat_app/common/routes/routes.dart';
+import 'package:chat_app/screens/welcome/bindings.dart';
+import 'package:chat_app/screens/welcome/welcome_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class AppPages {
+  static const INITIAL = AppRoutes.INITIAL;
+  static const Application = AppRoutes.Application;
+  // static final RouteObserver<Routes> observer = RouteObservers()
+  static List<String> history = [];
+  static final List<GetPage> routes = [
+       GetPage(
+      name: AppRoutes.INITIAL,
+      page: () => const WelcomeScreen(),
+      binding: WelcomeBindings(),
+      // middlewares: [
+      //   RouteWelcomeMiddleware(priority: 1),
+      // ],
+    ),
+    /*
+ 
+     GetPage(
+      name: AppRoutes.INITIAL,
+      page: () => WelcomeScreen(),
+      binding: WelcomeBinding(),
+      middlewares: [
+        RouteWelcomeMiddleware(priority: 1),
+      ],
+    ),
+     GetPage(
+      name: AppRoutes.INITIAL,
+      page: () => WelcomeScreen(),
+      binding: WelcomeBinding(),
+      middlewares: [
+        RouteWelcomeMiddleware(priority: 1),
+      ],
+    ),
+     GetPage(
+      name: AppRoutes.INITIAL,
+      page: () => WelcomeScreen(),
+      binding: WelcomeBinding(),
+      middlewares: [
+        RouteWelcomeMiddleware(priority: 1),
+      ],
+    ),
+     GetPage(
+      name: AppRoutes.INITIAL,
+      page: () => WelcomeScreen(),
+      binding: WelcomeBinding(),
+      middlewares: [
+        RouteWelcomeMiddleware(priority: 1),
+      ],
+    ),
+     GetPage(
+      name: AppRoutes.INITIAL,
+      page: () => WelcomeScreen(),
+      binding: WelcomeBinding(),
+      middlewares: [
+        RouteWelcomeMiddleware(priority: 1),
+      ],
+    ),
+    */
+  ];
+}
