@@ -39,6 +39,16 @@ dependencies:
   firebase_auth: ^4.2.10
   firebase_storage: ^11.0.15
   firebase_in_app_messaging: ^0.7.0+15
+  # For using the Firebase's Cloud Firestore 
+  cloud_firestore: ^4.4.4
+  # For State Management
+  get: ^4.6.5
+  # For location management
+  location: ^4.4.0
+  # To pick an image 
+  image_picker: ^0.8.7
+  # For viewing the image in the app
+  photo_view: ^0.14.0
 
 dev_dependencies:
   flutter_test:
