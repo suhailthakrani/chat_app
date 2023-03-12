@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "614835456658",
+    "project_id": "smart-chat-a4277",
+    "storage_bucket": "smart-chat-a4277.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614835456658:android:58a654dd9f2c6d4ed3344b",
+        "android_client_info": {
+          "package_name": "com.smart.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614835456658-gmlo86g1mcm3db3lmudfksk9mba7hpsm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYX__dGD6igYmY5dzMV3mIObOX4Kbqj34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614835456658-gmlo86g1mcm3db3lmudfksk9mba7hpsm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
