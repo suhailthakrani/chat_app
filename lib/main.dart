@@ -3,6 +3,7 @@ import 'package:chat_app/common/routes/pages.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 Future<void> main() async {
@@ -19,11 +20,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Text("Home"),),),
-      initialRoute:AppRoutes.INITIAL,
-      getPages: AppPages.routes,
-    );
+    return ScreenUtilInit(
+        builder: (BuildContext context, Widget? child) => GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              initialRoute: AppRoutes.INITIAL,
+              getPages: AppPages.routes,
+            ));
   }
 }
