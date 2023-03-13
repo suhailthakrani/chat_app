@@ -25,7 +25,7 @@ class AppPages {
   
  
      GetPage(
-      name: AppRoutes.INITIAL,
+      name: AppRoutes.SIGN_IN,
       page: () => const SignInScreen(),
       binding: SignInBindings(),
       // middlewares: [

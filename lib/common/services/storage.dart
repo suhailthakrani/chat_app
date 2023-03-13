@@ -11,7 +11,9 @@ class StorageService extends GetxService {
     return this;
   }
 
-
+  Future<bool> remove(String key)   async {
+    return await _preferences.remove(key);
+  }
   Future<bool> setString(String key, String value)   async {
     return await _preferences.setString(key, value);
   }
