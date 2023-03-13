@@ -31,11 +31,9 @@ class SignInScreen extends GetView<SignInController> {
 
     Widget _buildSignInWidget() {
       return Container(
-        width: 295.w,
-        margin: EdgeInsets.only(
-          top: 80.h,
-        ),
+        height: 250.h,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               "Sign in with Social Networks",
@@ -76,16 +74,15 @@ class SignInScreen extends GetView<SignInController> {
     }
 
     return Scaffold(
-      body: Center(
-        child: Container(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              _buildLogo(),
-              Spacer(),
-              _buildSignInWidget(),
-            ],
-          ),
+      body: Container(
+        padding: EdgeInsets.all(30),
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            _buildLogo(),
+            Spacer(),
+            _buildSignInWidget(),
+          ],
         ),
       ),
     );

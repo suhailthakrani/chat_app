@@ -36,7 +36,7 @@ class AppPages {
     ),
     
      GetPage(
-      name: AppRoutes.INITIAL,
+      name: AppRoutes.Application,
       page: () => ApplicationScreen(),
       binding: ApplicationBindings(),
       // middlewares: [

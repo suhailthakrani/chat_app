@@ -2,6 +2,7 @@ import 'package:chat_app/common/routes/names.dart';
 import 'package:chat_app/common/routes/pages.dart';
 import 'package:chat_app/common/services/storage.dart';
 import 'package:chat_app/common/store/config.dart';
+import 'package:chat_app/common/store/user_store.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/screens/welcome/controller.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,6 +15,8 @@ Future<void> main() async {
   await Get.putAsync<StorageService>(() => StorageService().init());
   Get.put<ConfigStrore>(ConfigStrore());
   Get.put(WelcomeController());
+  Get.put<UserStore>(UserStore());
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
