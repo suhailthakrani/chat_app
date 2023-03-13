@@ -1,15 +1,14 @@
-library sign_in;
+library application;
 export './state.dart';
 export './view.dart';
 export './bindings.dart';
 export './controller.dart';
 export './index.dart';
 
-//
-export 'package:chat_app/common/entities/user_data.dart';
-export 'package:chat_app/common/entities/user_model.dart';
+
 export 'package:chat_app/common/routes/names.dart';
 export 'package:chat_app/common/store/config.dart';
+export 'package:chat_app/screens/sign_in/state.dart';
 export 'package:chat_app/screens/welcome/state.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:firebase_core/firebase_core.dart';

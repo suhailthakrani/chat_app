@@ -1,12 +1,14 @@
 import 'package:chat_app/common/routes/names.dart';
 import 'package:chat_app/common/routes/observers.dart';
-import 'package:chat_app/common/routes/routes.dart';
+import 'package:chat_app/screens/application/view.dart';
 import 'package:chat_app/screens/sign_in/bindings.dart';
 import 'package:chat_app/screens/sign_in/view.dart';
 import 'package:chat_app/screens/welcome/bindings.dart';
 import 'package:chat_app/screens/welcome/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../screens/application/index.dart';
 
 class AppPages {
   static const INITIAL = AppRoutes.INITIAL;
@@ -32,15 +34,16 @@ class AppPages {
       //   RouteWelcomeMiddleware(priority: 1),
       // ],
     ),
-    /*
+    
      GetPage(
       name: AppRoutes.INITIAL,
-      page: () => WelcomeScreen(),
-      binding: WelcomeBinding(),
-      middlewares: [
-        RouteWelcomeMiddleware(priority: 1),
-      ],
+      page: () => ApplicationScreen(),
+      binding: ApplicationBindings(),
+      // middlewares: [
+      //   RouteWelcomeMiddleware(priority: 1),
+      // ],
     ),
+    /*
      GetPage(
       name: AppRoutes.INITIAL,
       page: () => WelcomeScreen(),

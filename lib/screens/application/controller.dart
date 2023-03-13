@@ -1,11 +1,14 @@
 
 
+import '../../common/entities/user_data.dart';
+import '../../common/entities/user_model.dart';
 import 'index.dart';
+
 
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>['openid']);
 
-class SignInController extends GetxController {
-  SignInController();
+class ApplicationController extends GetxController {
+  ApplicationController();
   final state = SignInState();
   //
   final db = FirebaseFirestore.instance;
