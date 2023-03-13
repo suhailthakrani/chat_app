@@ -1,4 +1,5 @@
 import 'package:chat_app/common/routes/names.dart';
+import 'package:chat_app/common/store/config.dart';
 import 'package:chat_app/screens/sign_in/state.dart';
 import 'package:chat_app/screens/welcome/state.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ class SignInController extends GetxController {
   }
   signIn() async {
     //
-    // await ConfigStrore.to.saveAlreadyOpen();
+    await ConfigStrore.to.saveAlreadyOpen();
     Get.offAndToNamed(AppRoutes.SIGN_IN);
   }
 }
