@@ -1,21 +1,28 @@
-import 'package:chat_app/screens/application/controller.dart';
-import 'package:chat_app/screens/sign_in/controller.dart';
-import 'package:chat_app/screens/welcome/index.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:dots_indicator/dots_indicator.dart';
+import 'package:chat_app/screens/contacts/components/contact_list.dart';
 
 import 'index.dart';
 
 class ContactsScreen extends GetView<ContactsController> {
   const ContactsScreen({super.key});
 
+  AppBar _buildAppBar() {
+    return AppBar(
+      elevation: 0,
+      title: Text(
+        "Contact",
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 18.sp,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-   
-
     return Scaffold(
-      body: Center(child: Text('Contacts '),),);
+      appBar: _buildAppBar(),
+      body: ContactList(),
+    );
   }
 }

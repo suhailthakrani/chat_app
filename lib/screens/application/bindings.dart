@@ -4,10 +4,13 @@ import 'package:chat_app/screens/sign_in/controller.dart';
 import 'package:chat_app/screens/welcome/controller.dart';
 import 'package:get/get.dart';
 
+import '../contacts/index.dart';
+
 class ApplicationBindings implements Bindings{
   @override
   void dependencies() {
     Get.lazyPut<ApplicationController>(() => ApplicationController());
+     Get.lazyPut<ContactsController>(() => ContactsController());
   }
 
 }

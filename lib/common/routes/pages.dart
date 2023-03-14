@@ -30,7 +30,7 @@ class AppPages {
       page: () => const SignInScreen(),
       binding: SignInBindings(),
       middlewares: [
-        RouteWelcomeMiddleware(priority: 1),
+        // RouteWelcomeMiddleware(priority: 1),
       ],
     ),
     
