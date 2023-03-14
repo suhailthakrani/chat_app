@@ -17,7 +17,7 @@ class SignInController extends GetxController {
   signIn() async {
     //
     await ConfigStrore.to.saveAlreadyOpen();
-    Get.offAndToNamed(AppRoutes.SIGN_IN);
+    Get.offAndToNamed(AppRoutes.Application);
   }
 
   Future<void> handleSignIn() async {
@@ -25,10 +25,10 @@ class SignInController extends GetxController {
       var user = await _googleSignIn.signIn();
       if (user != null) {
 
-        final _gAuthentication = await user.authentication;
+        final gAuthentication = await user.authentication;
         final credential = GoogleAuthProvider.credential(
-          idToken: _gAuthentication.idToken,
-          accessToken: _gAuthentication.accessToken,
+          idToken: gAuthentication.idToken,
+          accessToken: gAuthentication.accessToken,
         );
         await FirebaseAuth.instance.signInWithCredential(credential);
         String displayName = user.displayName ?? user.email;
@@ -71,7 +71,7 @@ class SignInController extends GetxController {
         }
         
         toastInfo(message: 'login success');
-        Get.offAndToNamed(AppRoutes.Application);
+        signIn();
       }
     } catch (e) {
       print(e.toString());
