@@ -43,7 +43,7 @@ class UserStore extends GetxController{
     _isLogin.value = true;
     StorageService.to.setString(STORAGE_USER_PROFILE_KEY, jsonEncode(user));
    
-    setToken(user.id!);
+    setToken(user.accessToken!);
   }
 
   Future<void> onLogOut() async {

@@ -36,7 +36,7 @@ class SignInController extends GetxController {
         String id = user.id;
         String photoUrl = user.photoUrl ?? '';
         UserModel userProfile = UserModel(
-            displayName: displayName, email: email, id: id, photoUrl: photoUrl);
+            displayName: displayName, email: email, accessToken: id, photoUrl: photoUrl);
         UserStore.to.saveProfile(userProfile);
 
         var userbase = await db

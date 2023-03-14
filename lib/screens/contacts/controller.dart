@@ -1,5 +1,9 @@
-import 'package:chat_app/common/entities/user_data.dart';
+import 'dart:convert';
 
+import 'package:chat_app/common/entities/user_data.dart';
+import 'package:chat_app/common/entities/user_model.dart';
+
+import '../../common/entities/message_data.dart';
 import 'index.dart';
 
 class ContactsController extends GetxController {
@@ -12,6 +16,89 @@ class ContactsController extends GetxController {
   onReady() {
     super.onReady();
     loadAllDataFromFirebase();
+  }
+
+  doChat(UserData to_userData) async {
+    // message sender
+    var from_messages = await db
+        .collection('messages')
+        .withConverter(
+          fromFirestore: Msg.fromFirestore,
+          toFirestore: (Msg msg, options) {
+            return msg.toFirestore();
+          },
+        )
+        .where('from_uid', isEqualTo: token)
+        .where('to_uid', isEqualTo: to_userData.id)
+        .get();
+
+    // Message Reciever
+    var to_messages = await db
+        .collection('messages')
+        .withConverter(
+          fromFirestore: Msg.fromFirestore,
+          toFirestore: (Msg msg, options) {
+            return msg.toFirestore();
+          },
+        )
+        .where('from_uid', isEqualTo: to_userData.id)
+        .where('to_uid', isEqualTo: token)
+        .get();
+
+    if (from_messages.docs.isEmpty && to_messages.docs.isEmpty) {
+      String profile = await UserStore.to.getProfile();
+      UserModel user = UserModel.fromJson(
+        jsonDecode(profile),
+      );
+
+      var messageData = Msg(
+        from_uid: user.accessToken,
+        to_uid: to_userData.id,
+        from_name: user.displayName,
+        to_name: to_userData.displayName,
+        from_avtar: user.photoUrl,
+        to_avtar: to_userData.photoUrl,
+        last_msg: '',
+        last_time: Timestamp.now(),
+        msg_num: 0,
+      );
+
+      db
+          .collection('messages')
+          .withConverter(
+            fromFirestore: Msg.fromFirestore,
+            toFirestore: (message, options) => message.toFirestore(),
+          )
+          .add(messageData)
+          .then(
+            (value) {
+              Get.toNamed('/chat', parameters: {
+              'doc_id': value.id,
+              'to_uid': to_userData.id ?? '',
+              'to_name': to_userData.displayName ?? '',
+              'to_avtar': to_userData.photoUrl ?? '',
+            });
+            }
+          );
+    }
+    else {
+      if (from_messages.docs.isNotEmpty) {
+         Get.toNamed('/chat', parameters: {
+              'doc_id': from_messages.docs.first.id,
+              'to_uid': to_userData.id ?? '',
+              'to_name': to_userData.displayName ?? '',
+              'to_avtar': to_userData.photoUrl ?? '',
+            });
+      }
+       if (to_messages.docs.isNotEmpty) {
+         Get.toNamed('/chat', parameters: {
+              'doc_id': to_messages.docs.first.id,
+              'to_uid': to_userData.id ?? '',
+              'to_name': to_userData.displayName ?? '',
+              'to_avtar': to_userData.photoUrl ?? '',
+            });
+      }
+    }
   }
 
   loadAllDataFromFirebase() async {

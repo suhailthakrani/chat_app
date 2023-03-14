@@ -40,7 +40,9 @@ class ContactList extends GetView<ContactsController> {
       ),
       child: InkWell(
         onTap: () {
-          //
+          if (userData.id != null) {
+            controller.doChat(userData);
+          }
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -57,6 +59,23 @@ class ContactList extends GetView<ContactsController> {
                 height: 54.w,
                 child: CachedNetworkImage(
                   imageUrl: "${userData.photoUrl}",
+                  errorWidget: (context, url, error) {
+                    return Container(
+                      height: 54.w,
+                      width: 54.w,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.green.shade600,
+                      ),
+                      child: Text(
+                        userData.displayName![0],
+                        style: TextStyle(
+                          fontSize: 28.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
