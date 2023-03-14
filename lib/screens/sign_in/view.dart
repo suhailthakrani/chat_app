@@ -75,7 +75,7 @@ class SignInScreen extends GetView<SignInController> {
 
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         alignment: Alignment.center,
         child: Column(
           children: [

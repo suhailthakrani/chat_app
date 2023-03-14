@@ -1,4 +1,4 @@
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'index.dart';
 
@@ -24,6 +24,13 @@ class SignInController extends GetxController {
     try {
       var user = await _googleSignIn.signIn();
       if (user != null) {
+
+        final _gAuthentication = await user.authentication;
+        final credential = GoogleAuthProvider.credential(
+          idToken: _gAuthentication.idToken,
+          accessToken: _gAuthentication.accessToken,
+        );
+        await FirebaseAuth.instance.signInWithCredential(credential);
         String displayName = user.displayName ?? user.email;
         String email = user.email;
         String id = user.id;
@@ -62,6 +69,7 @@ class SignInController extends GetxController {
               )
               .add(data);
         }
+        
         toastInfo(message: 'login success');
         Get.offAndToNamed(AppRoutes.Application);
       }
@@ -69,6 +77,19 @@ class SignInController extends GetxController {
       print(e.toString());
       toastInfo(message: 'login failed');
     }
+  }
+
+  // Check whether user is already logged in or not
+  @override
+  void onReady() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently logged out.');
+      } else {
+        print('User is logged in');
+      }
+    });
+    super.onReady();
   }
 }
 
