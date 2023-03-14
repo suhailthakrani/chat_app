@@ -1,92 +1,59 @@
-
-
 import '../../common/entities/user_data.dart';
 import '../../common/entities/user_model.dart';
 import 'index.dart';
 
 
-GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>['openid']);
 
 class ApplicationController extends GetxController {
   ApplicationController();
-  final state = SignInState();
+  final state = ApplicationState();
+
+
+  final List<BottomNavigationBarItem> tabItems = [
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.message),
+        activeIcon: Icon(Icons.message),
+        label: 'Chat',
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.contact_page),
+        activeIcon: Icon(Icons.contact_page),
+        label: 'Contact',
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        activeIcon: Icon(Icons.person),
+        label: 'Profile',
+      )
+    ];
+
   //
-  final db = FirebaseFirestore.instance;
+  late final List<String> tabTitles;
+  late final PageController pageController;
+  late final List<BottomNavigationBarItem> bottomTabs;
 
-  changePage(int index) async {
-    state.index.value = index;
+  
+  @override
+  void onInit() {
+    tabTitles = ['Chat', 'Contact', 'Profile'];
+    bottomTabs = tabItems;
+
+    pageController = PageController(initialPage: state.page,);
+    super.onInit();
   }
 
-  signIn() async {
-    //
-    await ConfigStrore.to.saveAlreadyOpen();
-    Get.offAndToNamed(AppRoutes.SIGN_IN);
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
-
-  Future<void> handleSignIn() async {
-    try {
-      var user = await _googleSignIn.signIn();
-      if (user != null) {
-        String displayName = user.displayName ?? user.email;
-        String email = user.email;
-        String id = user.id;
-        String photoUrl = user.photoUrl ?? '';
-        UserModel userProfile = UserModel(
-            displayName: displayName, email: email, id: id, photoUrl: photoUrl);
-        UserStore.to.saveProfile(userProfile);
-
-        var userbase = await db
-            .collection('users')
-            .withConverter(
-              fromFirestore: UserData.fromFirestore,
-              toFirestore: (UserData userData, options) {
-                return userData.toFirestore();
-              },
-            )
-            .where('id', isEqualTo: user.id)
-            .get();
-        if (userbase.docs.isEmpty) {
-          final data = UserData(
-            id: id,
-            displayName: displayName,
-            email: email,
-            photoUrl: photoUrl,
-            location: '',
-            fcmToken: '',
-            addTime: Timestamp.now(),
-          );
-          var userbase = await db
-              .collection('users')
-              .withConverter(
-                fromFirestore: UserData.fromFirestore,
-                toFirestore: (UserData userData, options) {
-                  return userData.toFirestore();
-                },
-              )
-              .add(data);
-        }
-        toastInfo(message: 'login success');
-        Get.offAndToNamed(AppRoutes.Application);
-      }
-    } catch (e) {
-      print(e.toString());
-      toastInfo(message: 'login failed');
-    }
-  }
-}
-
-Future<bool?> toastInfo({
-  required String message,
-  Color backgraoundColor = Colors.black,
-  Color textColor = Colors.white,
-}) {
-  return Fluttertoast.showToast(
-    msg: message,
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.TOP,
-    timeInSecForIosWeb: 2,
-    backgroundColor: backgraoundColor,
-    textColor: textColor,
-    fontSize: 16.sp,
-  );
+  // Manage the page changes in application
+  void onPageChanged(int index) {
+    state.page = index;
+  } 
+   void onNavBarTap(int index) {
+    state.page = index;
+  } 
+  
 }

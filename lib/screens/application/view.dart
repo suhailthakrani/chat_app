@@ -11,15 +11,43 @@ class ApplicationScreen extends GetView<ApplicationController> {
 
   @override
   Widget build(BuildContext context) {
+    Widget _buildPageView() {
+      return PageView(
+        scrollDirection: Axis.horizontal,
+        physics: NeverScrollableScrollPhysics(),
+        controller: controller.pageController,
+        onPageChanged: controller.onPageChanged,
+        children: [
+          Center(
+              child: Container(
+            child: Text("Chat"),
+          )),
+          Center(
+              child: Container(
+            child: Text("Contact"),
+          )),
+          Center(
+              child: Container(
+            child: Text("Profile"),
+          )),
+        ],
+      );
+    }
+
+    Widget _buildBottomNavigation() {
+      return Obx(
+        () => BottomNavigationBar(
+          items: controller.bottomTabs,
+          currentIndex: controller.state.page,
+          type: BottomNavigationBarType.fixed,
+          onTap: controller.onNavBarTap,
+        ),
+      );
+    }
+
     return Scaffold(
-        body: ListView.builder(
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        return const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text("data"),
-        );
-      },
-    ));
+      body: _buildPageView(),
+      bottomNavigationBar: _buildBottomNavigation(),
+    );
   }
 }

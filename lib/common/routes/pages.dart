@@ -1,3 +1,4 @@
+import 'package:chat_app/common/middlewares/middlewares.dart';
 import 'package:chat_app/common/routes/names.dart';
 import 'package:chat_app/common/routes/observers.dart';
 import 'package:chat_app/screens/application/view.dart';
@@ -20,9 +21,9 @@ class AppPages {
       name: AppRoutes.INITIAL,
       page: () => const WelcomeScreen(),
       binding: WelcomeBindings(),
-      // middlewares: [
-      //   RouteWelcomeMiddleware(priority: 1),
-      // ],
+      middlewares: [
+        RouteWelcomeMiddleware(priority: 1),
+      ],
     ),
   
  

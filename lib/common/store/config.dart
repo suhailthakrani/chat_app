@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:chat_app/common/services/storage.dart';
+import 'package:chat_app/common/values/storage.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:packages_info/packages_info.dart';
@@ -21,7 +22,7 @@ class ConfigStrore extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    isFirstOpen = StorageService.to.getBool('STORAGE_DEVICE_FIRST_OPEN_KEY');
+    isFirstOpen = StorageService.to.getBool(STORAGE_DEVICE_FIRST_OPEN_KEY);
   }
 
   //
@@ -31,12 +32,12 @@ class ConfigStrore extends GetxController {
 
   //
   Future<bool> saveAlreadyOpen() {
-    return StorageService.to.setBool('STORAGE_DEVICE_FIRST_OPEN_KEY', true);
+    return StorageService.to.setBool(STORAGE_DEVICE_FIRST_OPEN_KEY, true);
   }
 
   //
   void onInitLocale() {
-    var langCode = StorageService.to.getString('STORAGE_LANGUAGE_CODE');
+    var langCode = StorageService.to.getString(STORAGE_LANGUAGE_CODE);
     if (langCode.isEmpty) return;
     var index = languages.indexWhere((element) {
       return element.languageCode == langCode;
@@ -48,6 +49,6 @@ class ConfigStrore extends GetxController {
   void onLocaleUpdate(Locale value) {
     locale = value;
     Get.updateLocale(value);
-    StorageService.to.setString('STORAGE_LANGUAGE_CODE', value.languageCode);
+    StorageService.to.setString(STORAGE_LANGUAGE_CODE, value.languageCode);
   }
 }
