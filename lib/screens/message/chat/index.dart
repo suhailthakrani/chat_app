@@ -18,4 +18,4 @@ export 'package:flutter/material.dart';
 export 'package:get/get.dart';
 export 'package:google_sign_in/google_sign_in.dart';
 
-export '../../common/store/user_store.dart';
+export '../../../common/store/user_store.dart';

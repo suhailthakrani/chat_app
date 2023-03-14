@@ -1,4 +1,4 @@
-import '../../screens/chat/index.dart';
+import '../../screens/message/chat/index.dart';
 
 class MsgContent {
   final String? uid;
