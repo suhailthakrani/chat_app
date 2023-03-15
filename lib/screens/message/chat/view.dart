@@ -1,5 +1,6 @@
 import 'package:chat_app/screens/contacts/components/contact_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chat_app/screens/message/chat/components/chat_list.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'index.dart';
@@ -8,6 +9,7 @@ class ChatScreen extends GetView<ChatController> {
   const ChatScreen({super.key});
 
   AppBar _buildAppBar(context) {
+    
     return AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -15,15 +17,15 @@ class ChatScreen extends GetView<ChatController> {
           decoration: BoxDecoration(color: Theme.of(context).primaryColor),
         ),
         title: Padding(
-          padding: EdgeInsets.only(top: 0.w, bottom: 0.w, right: 0.w),
+          padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
           child: Row(
             children: [
               Container(
-                padding: EdgeInsets.only(top: 0.w, bottom: 0.w, right: 0.w),
+                padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
                 child: InkWell(
                   child: SizedBox(
-                    height: 44.w,
-                    width: 44.w,
+                    height: 44,
+                    width: 44,
                     child: CachedNetworkImage(
                       imageUrl: controller.state.to_avtar.value,
                       errorWidget: (context, url, error) {
@@ -33,11 +35,11 @@ class ChatScreen extends GetView<ChatController> {
                       },
                       imageBuilder: (context, imageProvider) {
                         return Container(
-                          height: 44.w,
-                          width: 44.w,
+                          height: 44,
+                          width: 44,
                           margin: null,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(44.w),
+                            borderRadius: BorderRadius.circular(44),
                             image: DecorationImage(
                               image: imageProvider,
                               fit: BoxFit.cover,
@@ -49,15 +51,15 @@ class ChatScreen extends GetView<ChatController> {
                   ),
                 ),
               ),
-              SizedBox(width: 15.w),
+              SizedBox(width: 15),
               Container(
-                width: 180.w,
-                padding: EdgeInsets.only(top: 0.w, bottom: 0.w, right: 0.w),
+                width: 180,
+                padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 180.w,
-                      height: 44.w,
+                      width: 180,
+                      height: 44,
                       child: GestureDetector(
                         onTap: () {
                           // Will be implemented in future
@@ -73,7 +75,7 @@ class ChatScreen extends GetView<ChatController> {
                               style: TextStyle(
                                 fontFamily: 'Avenir',
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16.sp,
+                                fontSize: 16,
                               ),
                             ),
                             Text(
@@ -83,7 +85,7 @@ class ChatScreen extends GetView<ChatController> {
                               style: TextStyle(
                                 fontFamily: 'Avenir',
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16.sp,
+                                fontSize: 16,
                               ),
                             )
                           ],
@@ -107,18 +109,19 @@ class ChatScreen extends GetView<ChatController> {
           constraints: BoxConstraints.expand(),
           child: Stack(
             children: [
+              ChatList(),
               Positioned(
-                bottom: 0.h,
-                height: 50.h,
+                bottom: 0,
+                height: 50,
                 child: Container(
-                  width: 360.w,
-                  height: 58.h,
+                  width: 360,
+                  height: 58,
                   color: Colors.white,
                   child: Row(
                     children: [
                       Container(
-                        width: 217.w,
-                        height: 50.h,
+                        width: 217,
+                        height: 50,
                         child: TextField(
                           controller: controller.textMessageController,
                           autofocus: false,
@@ -129,9 +132,9 @@ class ChatScreen extends GetView<ChatController> {
                         ),
                       ),
                       Container(
-                        height: 30.h,
-                        width: 30.w,
-                        margin: EdgeInsets.only(left: 5.w),
+                        height: 30,
+                        width: 30,
+                        margin: EdgeInsets.only(left: 5),
                         child: GestureDetector(
                           onTap: () {
                             // Implement later
@@ -144,11 +147,11 @@ class ChatScreen extends GetView<ChatController> {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                          left: 10.w,
-                          top: 5.h,
+                          left: 10,
+                          top: 5,
                         ),
-                        width: 64.w,
-                        height: 35.w,
+                        width: 64,
+                        height: 35,
                         child: ElevatedButton(
                             onPressed: () {
                               controller.sendMessage();

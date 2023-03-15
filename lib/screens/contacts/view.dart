@@ -12,7 +12,7 @@ class ContactsScreen extends GetView<ContactsController> {
         "Contact",
         style: TextStyle(
           fontWeight: FontWeight.w600,
-          fontSize: 18.sp,
+          fontSize: 18,
         ),
       ),
     );

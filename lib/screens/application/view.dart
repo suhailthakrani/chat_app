@@ -1,9 +1,10 @@
 import 'package:chat_app/screens/application/controller.dart';
 import 'package:chat_app/screens/sign_in/controller.dart';
+import 'package:chat_app/screens/sign_in/index.dart';
 import 'package:chat_app/screens/welcome/index.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
@@ -30,9 +31,12 @@ class ApplicationScreen extends GetView<ApplicationController> {
               child: Container(
             child: GestureDetector(
                 onTap: () {
+                  print(FirebaseAuth.instance.currentUser!.email ??
+                      "No oooooooooooooooooooooooooo");
                   UserStore.to.onLogOut();
 
                   FirebaseAuth.instance.signOut();
+                  Get.off(SignInScreen());
                 },
                 child: Text("Profile")),
           )),

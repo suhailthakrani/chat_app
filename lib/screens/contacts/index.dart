@@ -12,7 +12,7 @@ export 'package:chat_app/screens/sign_in/state.dart';
 export 'package:chat_app/screens/welcome/state.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:firebase_core/firebase_core.dart';
-export 'package:flutter_screenutil/flutter_screenutil.dart';
+// export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:fluttertoast/fluttertoast.dart';
 export 'package:flutter/material.dart';
 export 'package:get/get.dart';

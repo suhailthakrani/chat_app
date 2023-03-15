@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import '../entities/user_model.dart';
 
-class UserStore extends GetxController{
+class UserStore extends GetxController {
   String token = '';
   final _isLogin = false.obs;
   final _profile = UserModel().obs;
@@ -18,15 +18,18 @@ class UserStore extends GetxController{
 
   static UserStore get to => Get.find();
 
-
   @override
   void onInit() {
     super.onInit();
     token = StorageService.to.getString(STORAGE_USER_TOKEN_KEY);
-     var offlineProfile = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
+    var offlineProfile = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
     if (offlineProfile.isNotEmpty) {
       _isLogin.value = true;
-      _profile(UserModel.fromJson(jsonDecode(offlineProfile),),);
+      _profile(
+        UserModel.fromJson(
+          jsonDecode(offlineProfile),
+        ),
+      );
     }
   }
 
@@ -36,13 +39,17 @@ class UserStore extends GetxController{
   }
 
   Future<String> getProfile() async {
+    print("Toekn:: ${token}");
     if (token.isEmpty) return '';
-    return StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
+    var key = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
+    print("Key::;:: ${key}");
+    return key;
   }
-   saveProfile(UserModel user) {
+
+  saveProfile(UserModel user) {
     _isLogin.value = true;
     StorageService.to.setString(STORAGE_USER_PROFILE_KEY, jsonEncode(user));
-   
+
     setToken(user.accessToken!);
   }
 

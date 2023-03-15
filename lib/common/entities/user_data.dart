@@ -21,31 +21,32 @@ class UserData {
     required this.addTime,
   });
 
-
-  factory UserData.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot, SnapshotOptions? options) {
+  factory UserData.fromFirestore(
+      DocumentSnapshot<Map<String, dynamic>> snapshot,
+      SnapshotOptions? options) {
     final map = snapshot.data();
-     return UserData(
-      id: map?['id'] != null ? map!['id'] as String : null,
-      displayName: map?['displayName'] != null ? map!['displayName'] as String : null,
-      email: map?['email'] != null ? map!['email'] as String : null,
-      photoUrl: map?['photoUrl'] != null ? map!['photoUrl'] as String : null,
-      location: map?['location'] != null ? map!['location'] as String : null,
-      fcmToken: map?['fcmToken'] != null ? map!['fcmToken'] as String : null,
-      addTime: map?['addTime'] != null ?  map!['addTime'] as Timestamp : null
-    );
+    return UserData(
+        id: map?['id'] != null ? map!['id'] as String : null,
+        displayName:
+            map?['displayName'] != null ? map!['displayName'] as String : null,
+        email: map?['email'] != null ? map!['email'] as String : null,
+        photoUrl: map?['photoUrl'] != null ? map!['photoUrl'] as String : null,
+        location: map?['location'] != null ? map!['location'] as String : null,
+        fcmToken: map?['fcmToken'] != null ? map!['fcmToken'] as String : null,
+        addTime: map?['addTime'] != null ? map!['addTime'] as Timestamp : null);
   }
 
- Map<String, dynamic> toFirestore() {
-  return <String, dynamic>{
-      if(id != null)'id': id,
-      if(displayName != null) 'displayName': displayName,
-      if(email != null) 'email': email,
-      if(photoUrl != null) 'photoUrl': photoUrl,
-      if(location != null) 'location': location,
-      if(fcmToken != null) 'fcmToken': fcmToken,
-      if(addTime != null) 'addTime': addTime,
+  Map<String, dynamic> toFirestore() {
+    return <String, dynamic>{
+      if (id != null) 'id': id,
+      if (displayName != null) 'displayName': displayName,
+      if (email != null) 'email': email,
+      if (photoUrl != null) 'photoUrl': photoUrl,
+      if (location != null) 'location': location,
+      if (fcmToken != null) 'fcmToken': fcmToken,
+      if (addTime != null) 'addTime': addTime,
     };
- }
+  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -61,19 +62,20 @@ class UserData {
 
   factory UserData.fromMap(Map<String, dynamic> map) {
     return UserData(
-      id: map['id'] != null ? map['id'] as String : null,
-      displayName: map['displayName'] != null ? map['displayName'] as String : null,
-      email: map['email'] != null ? map['email'] as String : null,
-      photoUrl: map['photoUrl'] != null ? map['photoUrl'] as String : null,
-      location: map['location'] != null ? map['location'] as String : null,
-      fcmToken: map['fcmToken'] != null ? map['fcmToken'] as String : null,
-      addTime: map['addTime'] != null ?  map['addTime'] as Timestamp : null
-    );
+        id: map['id'] != null ? map['id'] as String : null,
+        displayName:
+            map['displayName'] != null ? map['displayName'] as String : null,
+        email: map['email'] != null ? map['email'] as String : null,
+        photoUrl: map['photoUrl'] != null ? map['photoUrl'] as String : null,
+        location: map['location'] != null ? map['location'] as String : null,
+        fcmToken: map['fcmToken'] != null ? map['fcmToken'] as String : null,
+        addTime: map['addTime'] != null ? map['addTime'] as Timestamp : null);
   }
 
   String toJson() => json.encode(toMap());
 
-  factory UserData.fromJson(String source) => UserData.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserData.fromJson(String source) =>
+      UserData.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -83,25 +85,24 @@ class UserData {
   @override
   bool operator ==(covariant UserData other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.displayName == displayName &&
-      other.email == email &&
-      other.photoUrl == photoUrl &&
-      other.location == location &&
-      other.fcmToken == fcmToken &&
-      other.addTime == addTime;
+
+    return other.id == id &&
+        other.displayName == displayName &&
+        other.email == email &&
+        other.photoUrl == photoUrl &&
+        other.location == location &&
+        other.fcmToken == fcmToken &&
+        other.addTime == addTime;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      displayName.hashCode ^
-      email.hashCode ^
-      photoUrl.hashCode ^
-      location.hashCode ^
-      fcmToken.hashCode ^
-      addTime.hashCode;
+        displayName.hashCode ^
+        email.hashCode ^
+        photoUrl.hashCode ^
+        location.hashCode ^
+        fcmToken.hashCode ^
+        addTime.hashCode;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:chat_app/screens/welcome/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
@@ -12,8 +12,8 @@ class WelcomeScreen extends GetView<WelcomeController> {
     return Scaffold(
         body: Obx(
       () => SizedBox(
-        height: 780.h,
-        width: 360.w,
+        height: 780,
+        width: 360,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [

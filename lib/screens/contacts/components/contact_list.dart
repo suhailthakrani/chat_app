@@ -3,7 +3,7 @@ import 'package:chat_app/screens/application/index.dart';
 import 'package:chat_app/screens/contacts/controller.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class ContactList extends GetView<ContactsController> {
@@ -15,7 +15,7 @@ class ContactList extends GetView<ContactsController> {
       () => CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: EdgeInsets.symmetric(vertical: 0.h, horizontal: 0.w),
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 childCount: controller.state.contactList.length,
@@ -34,9 +34,9 @@ class ContactList extends GetView<ContactsController> {
   Widget _buildContactWidget(UserData userData) {
     return Container(
       padding: EdgeInsets.only(
-        top: 15.w,
-        left: 15.w,
-        right: 15.w,
+        top: 15,
+        left: 15,
+        right: 15,
       ),
       child: InkWell(
         onTap: () {
@@ -50,19 +50,22 @@ class ContactList extends GetView<ContactsController> {
           children: [
             Container(
               padding: EdgeInsets.only(
-                top: 0.w,
-                left: 0.w,
-                right: 15.w,
+                top: 0,
+                left: 0,
+                right: 15,
               ),
               child: SizedBox(
-                width: 54.w,
-                height: 54.w,
+                width: 54,
+                height: 54,
                 child: CachedNetworkImage(
                   imageUrl: "${userData.photoUrl}",
+                  imageBuilder: (context, imageProvider) {
+                    return Container();
+                  },
                   errorWidget: (context, url, error) {
                     return Container(
-                      height: 54.w,
-                      width: 54.w,
+                      height: 54,
+                      width: 54,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: Colors.green.shade600,
@@ -70,7 +73,7 @@ class ContactList extends GetView<ContactsController> {
                       child: Text(
                         userData.displayName![0],
                         style: TextStyle(
-                          fontSize: 28.sp,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -81,11 +84,11 @@ class ContactList extends GetView<ContactsController> {
             ),
             Container(
               padding: EdgeInsets.only(
-                top: 15.w,
-                left: 0.w,
-                right: 0.w,
+                top: 15,
+                left: 0,
+                right: 0,
               ),
-              width: 250.w,
+              width: 250,
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
@@ -97,14 +100,14 @@ class ContactList extends GetView<ContactsController> {
               child: Row(
                 children: [
                   SizedBox(
-                    width: 200.w,
-                    height: 42.w,
+                    width: 200,
+                    height: 42,
                     child: Text(
                       userData.displayName ?? '',
                       style: TextStyle(
                         fontFamily: 'Avenir',
                         fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
+                        fontSize: 16,
                         color: Colors.black54,
                       ),
                     ),

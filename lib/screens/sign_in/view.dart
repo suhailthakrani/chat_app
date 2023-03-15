@@ -1,7 +1,7 @@
 import 'package:chat_app/screens/sign_in/controller.dart';
 import 'package:chat_app/screens/welcome/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
@@ -12,7 +12,7 @@ class SignInScreen extends GetView<SignInController> {
   Widget build(BuildContext context) {
     Widget _buildLogo() {
       return Card(
-        margin: EdgeInsets.only(top: 76.h),
+        margin: EdgeInsets.only(top: 76),
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -21,8 +21,8 @@ class SignInScreen extends GetView<SignInController> {
           borderRadius: BorderRadius.circular(12),
           child: Image.asset(
             'assets/images/animals.jpg',
-            width: 76.w,
-            height: 76.h,
+            width: 76,
+            height: 76,
             fit: BoxFit.cover,
           ),
         ),
@@ -31,7 +31,7 @@ class SignInScreen extends GetView<SignInController> {
 
     Widget _buildSignInWidget() {
       return Container(
-        height: 250.h,
+        height: 250,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -40,16 +40,16 @@ class SignInScreen extends GetView<SignInController> {
               style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.w500,
-                fontSize: 18.sp,
+                fontSize: 18,
                 height: 1,
               ),
             ),
             SizedBox(
-              height: 30.h,
+              height: 30,
             ),
             SizedBox(
-              height: 55.h,
-              width: 250.w,
+              height: 55,
+              width: 250,
               child: ElevatedButton(
                 onPressed: () {
                   controller.handleSignIn();
@@ -63,7 +63,7 @@ class SignInScreen extends GetView<SignInController> {
                   "Google Sign In",
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    fontSize: 16.sp,
+                    fontSize: 16,
                   ),
                 ),
               ),

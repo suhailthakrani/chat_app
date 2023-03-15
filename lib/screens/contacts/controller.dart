@@ -47,6 +47,8 @@ class ContactsController extends GetxController {
 
     if (from_messages.docs.isEmpty && to_messages.docs.isEmpty) {
       String profile = await UserStore.to.getProfile();
+      print("Printing Profile:::: ${profile}");
+     
       UserModel user = UserModel.fromJson(
         jsonDecode(profile),
       );
@@ -70,33 +72,30 @@ class ContactsController extends GetxController {
             toFirestore: (message, options) => message.toFirestore(),
           )
           .add(messageData)
-          .then(
-            (value) {
-              Get.toNamed('/chat', parameters: {
-              'doc_id': value.id,
-              'to_uid': to_userData.id ?? '',
-              'to_name': to_userData.displayName ?? '',
-              'to_avtar': to_userData.photoUrl ?? '',
-            });
-            }
-          );
-    }
-    else {
+          .then((value) {
+        Get.toNamed('/chat', parameters: {
+          'doc_id': value.id,
+          'to_uid': to_userData.id ?? '',
+          'to_name': to_userData.displayName ?? '',
+          'to_avtar': to_userData.photoUrl ?? '',
+        });
+      });
+    } else {
       if (from_messages.docs.isNotEmpty) {
-         Get.toNamed('/chat', parameters: {
-              'doc_id': from_messages.docs.first.id,
-              'to_uid': to_userData.id ?? '',
-              'to_name': to_userData.displayName ?? '',
-              'to_avtar': to_userData.photoUrl ?? '',
-            });
+        Get.toNamed('/chat', parameters: {
+          'doc_id': from_messages.docs.first.id,
+          'to_uid': to_userData.id ?? '',
+          'to_name': to_userData.displayName ?? '',
+          'to_avtar': to_userData.photoUrl ?? '',
+        });
       }
-       if (to_messages.docs.isNotEmpty) {
-         Get.toNamed('/chat', parameters: {
-              'doc_id': to_messages.docs.first.id,
-              'to_uid': to_userData.id ?? '',
-              'to_name': to_userData.displayName ?? '',
-              'to_avtar': to_userData.photoUrl ?? '',
-            });
+      if (to_messages.docs.isNotEmpty) {
+        Get.toNamed('/chat', parameters: {
+          'doc_id': to_messages.docs.first.id,
+          'to_uid': to_userData.id ?? '',
+          'to_name': to_userData.displayName ?? '',
+          'to_avtar': to_userData.photoUrl ?? '',
+        });
       }
     }
   }

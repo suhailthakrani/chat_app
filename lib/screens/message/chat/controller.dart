@@ -93,7 +93,16 @@ class ChatController extends GetxController {
               default:
             }
           }
-         });
+         },
+         onError: (error)=> print("Listen Faild:  ${error}")
+         );
+         
 
+  }
+  @override
+  void dispose() {
+    messagesScrollController.dispose();
+    listener.cancel();
+    super.dispose();
   }
 }
