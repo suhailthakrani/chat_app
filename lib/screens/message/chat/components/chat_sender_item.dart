@@ -8,7 +8,7 @@ Widget chatRightWidget(MsgContent msgContent) {
     padding: EdgeInsets.only(
       top: 10,
       left: 15,
-      right: 15,
+      // right: 15,
       bottom: 10,
     ),
     child: Row(
@@ -16,7 +16,7 @@ Widget chatRightWidget(MsgContent msgContent) {
       children: [
         // Outer Contrainet Box
         ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 230, maxHeight: 40),
+          constraints: BoxConstraints(maxWidth: 230, maxHeight: 100),
           child: Container(
             padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
             margin: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
@@ -31,7 +31,7 @@ Widget chatRightWidget(MsgContent msgContent) {
                       print("Clicked........................");
                     },
                     child: Text(
-                      (msgContent.content) ?? 'jjjj',
+                      (msgContent.content),
                       style: TextStyle(fontSize: 14, color: Colors.black54),
                     ),
                   )
@@ -44,7 +44,7 @@ Widget chatRightWidget(MsgContent msgContent) {
                         //
                       },
                       child: CachedNetworkImage(
-                        imageUrl: "${msgContent.content}",
+                        imageUrl: "",
                         errorWidget: (context, url, error) {
                           return Icon(
                             Icons.error_outline,

@@ -70,6 +70,7 @@ class ChatController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    print("LOADING MESSAGES.....");
     var messages = db
         .collection('messages')
         .doc(doc_id)
@@ -80,7 +81,7 @@ class ChatController extends GetxController {
               msgContent.toFirestore(),
         )
         .orderBy('addTime', descending: true);
-    print(messages);
+    print("AAAAAAAAAAAAAAAA ${messages.count().get()}");
     state.messageContentList.clear();
     listener = messages.snapshots().listen((event) {
       for (var change in event.docChanges) {

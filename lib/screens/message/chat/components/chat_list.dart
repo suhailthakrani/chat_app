@@ -25,7 +25,12 @@ class ChatList extends GetView<ChatController> {
                         childCount: controller.state.messageContentList.length,
                         (context, index) {
                   var item = controller.state.messageContentList[index];
+
                   if (controller.user_id == item.uid) {
+                    print(item.addTime);
+                    print(item.content);
+                    print(item.uid);
+                    print(item.type);
                     return chatRightWidget(item);
                   }
                   return null;

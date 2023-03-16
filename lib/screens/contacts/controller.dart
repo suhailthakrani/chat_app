@@ -48,14 +48,14 @@ class ContactsController extends GetxController {
 
     if (from_messages.docs.isEmpty && to_messages.docs.isEmpty) {
       String profile = await UserStore.to.getProfile();
-      print("PPPPPPPPPPPPPP: ${profile.characters}");
 
-      // UserModel user = UserModel.fromJson(profile.replaceAll('\n', ' '));
-      // print("jjjjjjjjjjjjjj: ${user}");
+      /// TODO: Change from_uid, From_name, From_avatar
+      /// TODO: Here is an issue if user is offline like....
       var messageData = Msg(
         from_uid: FirebaseAuth.instance.currentUser!.refreshToken ?? '',
         to_uid: to_userData.id,
-        from_name: FirebaseAuth.instance.currentUser!.displayName ?? 'Unknown',
+        from_name: FirebaseAuth.instance.currentUser!.displayName ??
+            FirebaseAuth.instance.currentUser!.email,
         to_name: to_userData.displayName,
         from_avtar: FirebaseAuth.instance.currentUser!.photoURL ?? '',
         to_avtar: to_userData.photoUrl,

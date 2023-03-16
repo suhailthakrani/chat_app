@@ -15,86 +15,98 @@ class ChatScreen extends GetView<ChatController> {
         flexibleSpace: Container(
           decoration: BoxDecoration(color: Theme.of(context).primaryColor),
         ),
-        title: Padding(
-          padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
-          child: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
-                child: InkWell(
-                  child: SizedBox(
-                    height: 44,
-                    width: 44,
-                    child: CachedNetworkImage(
-                      imageUrl: controller.state.to_avtar.value ,
-                      errorWidget: (context, url, error) {
-                        return Icon(
-                          CupertinoIcons.person_alt_circle,
-                        );
-                      },
-                      imageBuilder: (context, imageProvider) {
-                        return Container(
-                          height: 44,
-                          width: 44,
-                          margin: null,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(44),
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
+        title: InkWell(
+          onTap: () {
+            print(controller.state.messageContentList.first.content == ''
+                ? "jjjjjjjjjjj"
+                : controller.state.messageContentList.first.content);
+          },
+          child: Padding(
+            padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
+                  child: InkWell(
+                    child: SizedBox(
+                      height: 44,
+                      width: 44,
+                      child: CachedNetworkImage(
+                        imageUrl: controller.state.to_avtar.value,
+                        errorWidget: (context, url, error) {
+                          return InkWell(
+                            onTap: () {
+                              // print(controller.state.messageContentList);
+                            },
+                            child: Icon(
+                              CupertinoIcons.person_alt_circle,
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                        imageBuilder: (context, imageProvider) {
+                          return Container(
+                            height: 44,
+                            width: 44,
+                            margin: null,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(44),
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(width: 15),
-              Container(
-                width: 180,
-                padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 180,
-                      height: 44,
-                      child: GestureDetector(
-                        onTap: () {
-                          // Will be implemented in future
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              controller.state.to_name.value,
-                              overflow: TextOverflow.clip,
-                              maxLines: 1,
-                              style: TextStyle(
-                                fontFamily: 'Avenir',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                SizedBox(width: 15),
+                Container(
+                  width: 180,
+                  padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 180,
+                        height: 44,
+                        child: GestureDetector(
+                          onTap: () {
+                            // Will be implemented in future
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                controller.state.to_name.value,
+                                overflow: TextOverflow.clip,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontFamily: 'Avenir',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'unkown location',
-                              overflow: TextOverflow.clip,
-                              maxLines: 1,
-                              style: TextStyle(
-                                fontFamily: 'Avenir',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            )
-                          ],
+                              Text(
+                                'unkown location',
+                                overflow: TextOverflow.clip,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontFamily: 'Avenir',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }
