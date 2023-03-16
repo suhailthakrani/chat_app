@@ -9,6 +9,9 @@ class SignInController extends GetxController {
   final state = SignInState();
   //
   final db = FirebaseFirestore.instance;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
 
   changePage(int index) async {
     state.index.value = index;
@@ -78,12 +81,12 @@ class SignInController extends GetxController {
       toastInfo(message: 'login failed');
     }
   }
-  Future<void> signUp(String email, String password) async {
+  Future<void> signUp() async {
   try {
     UserCredential userCredential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
+      email: emailController.text,
+      password: passwordController.text,
     );
     User? user = userCredential.user;
     // do something with the user object
@@ -98,12 +101,12 @@ class SignInController extends GetxController {
   }
 }
 
-Future<void> signInWithEmailAndPassword(String email, String password) async {
+Future<void> signInWithEmailAndPassword() async {
   try {
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
+      email: emailController.text,
+      password: passwordController.text,
     );
     User? user = userCredential.user;
     // do something with the user object

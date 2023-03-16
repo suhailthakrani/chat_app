@@ -77,22 +77,20 @@ class SignInScreen extends GetView<SignInController> {
             // _buildLogo(),
             Spacer(),
             _buildTextField(
+              controller: controller.emailController,
               label: 'Email',
               icon: Icons.email,
-              onChanged: (value) {
-                //
-              },
+              
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(
               height: 20,
             ),
             _buildTextField(
+              controller: controller.passwordController,
               label: 'Password',
               icon: Icons.lock,
-              onChanged: (value) {
-                //
-              },
+              
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(
@@ -100,7 +98,7 @@ class SignInScreen extends GetView<SignInController> {
             ),
             ElevatedButton(
               onPressed: () {
-                controller.signInWithEmailAndPassword('hello@gmail.com', '12345678');
+                controller.signInWithEmailAndPassword();
               },
               child: Text('Continue with Email'),
             ),
@@ -114,12 +112,12 @@ class SignInScreen extends GetView<SignInController> {
   Widget _buildTextField({
     required String label,
     required IconData icon,
-    required Function(String) onChanged,
+    required final TextEditingController controller,
     bool isPassword = false,
     TextInputType keyboardType = TextInputType.text,
   }) {
     return TextField(
-      onChanged: onChanged,
+      controller: controller,
       keyboardType: keyboardType,
       obscureText: isPassword,
       decoration: InputDecoration(
