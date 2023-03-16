@@ -47,11 +47,12 @@ class ContactsController extends GetxController {
 
     if (from_messages.docs.isEmpty && to_messages.docs.isEmpty) {
       String profile = await UserStore.to.getProfile();
-      print("Printing Profile:::: ${profile}");
-     
-      UserModel user = UserModel.fromJson(
-        jsonDecode(profile),
-      );
+      String jsonStringWithoutEscapeChars = profile.replaceAll('\\', '');
+
+      print("jjjjjjjjjjjjjj: ${jsonStringWithoutEscapeChars}");
+      UserModel user =
+          UserModel.fromMap(jsonDecode(jsonStringWithoutEscapeChars));
+  
 
       var messageData = Msg(
         from_uid: user.accessToken,

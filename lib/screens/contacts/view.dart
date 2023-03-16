@@ -15,6 +15,9 @@ class ContactsScreen extends GetView<ContactsController> {
           fontSize: 18,
         ),
       ),
+      actions: [IconButton(onPressed: () {
+        
+      }, icon: Icon(Icons.cloud_circle))],
     );
   }
 

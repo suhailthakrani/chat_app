@@ -39,10 +39,11 @@ class UserStore extends GetxController {
   }
 
   Future<String> getProfile() async {
-    print("Toekn:: ${token}");
+    
     if (token.isEmpty) return '';
     var key = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
-    print("Key::;:: ${key}");
+    print("Key:::: ${key}");
+    
     return key;
   }
 

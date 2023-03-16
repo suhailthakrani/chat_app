@@ -33,10 +33,6 @@ class ApplicationScreen extends GetView<ApplicationController> {
                 onTap: () {
                   print(FirebaseAuth.instance.currentUser!.email ??
                       "No oooooooooooooooooooooooooo");
-                  UserStore.to.onLogOut();
-
-                  FirebaseAuth.instance.signOut();
-                  Get.off(SignInScreen());
                 },
                 child: Text("Profile")),
           )),

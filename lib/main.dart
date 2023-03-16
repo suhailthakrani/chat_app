@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
     
     return GetMaterialApp(
               debugShowCheckedModeBanner: false,
-              initialRoute: AppRoutes.INITIAL,
+              initialRoute: AppRoutes.SIGN_IN,
               getPages: AppPages.routes,
             );
   }

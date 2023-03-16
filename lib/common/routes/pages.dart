@@ -20,7 +20,7 @@ class AppPages {
       page: () => const WelcomeScreen(),
       binding: WelcomeBindings(),
       middlewares: [
-        RouteWelcomeMiddleware(priority: 1),
+        // RouteWelcomeMiddleware(priority: 1),
       ],
     ),
   

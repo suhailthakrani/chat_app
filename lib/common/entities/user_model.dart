@@ -47,13 +47,25 @@ class UserModel {
 
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(String source) {
+  Map<String, dynamic> map = json.decode(source);
+  
+  // Check if required properties are present
+  if (map['displayName'] == null ||
+      map['email'] == null ||
+      map['accessToken'] == null) {
+    throw FormatException("Missing required properties in JSON string");
+  }
 
+  return UserModel(
+    displayName: map['displayName'] as String?,
+    email: map['email'] as String?,
+    accessToken: map['accessToken'] as String?,
+    photoUrl: map['photoUrl'] as String?,
+  );
+}
   @override
   String toString() {
     return 'UserModel(displayName: $displayName, email: $email, accessToken: $accessToken, photoUrl: $photoUrl)';
   }
-
- 
- 
 }
