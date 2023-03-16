@@ -42,9 +42,9 @@ class UserStore extends GetxController {
     
     if (token.isEmpty) return '';
     var key = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
-    print("Key:::: ${key}");
+  
     
-    return key;
+    return key.replaceAll('\\', '');
   }
 
   saveProfile(UserModel user) {

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:chat_app/common/entities/user_data.dart';
 import 'package:chat_app/common/entities/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../common/entities/message_data.dart';
 import 'index.dart';
@@ -47,19 +48,16 @@ class ContactsController extends GetxController {
 
     if (from_messages.docs.isEmpty && to_messages.docs.isEmpty) {
       String profile = await UserStore.to.getProfile();
-      String jsonStringWithoutEscapeChars = profile.replaceAll('\\', '');
+      print("PPPPPPPPPPPPPP: ${profile.characters}");
 
-      print("jjjjjjjjjjjjjj: ${jsonStringWithoutEscapeChars}");
-      UserModel user =
-          UserModel.fromMap(jsonDecode(jsonStringWithoutEscapeChars));
-  
-
+      // UserModel user = UserModel.fromJson(profile.replaceAll('\n', ' '));
+      // print("jjjjjjjjjjjjjj: ${user}");
       var messageData = Msg(
-        from_uid: user.accessToken,
+        from_uid: FirebaseAuth.instance.currentUser!.refreshToken ?? '',
         to_uid: to_userData.id,
-        from_name: user.displayName,
+        from_name: FirebaseAuth.instance.currentUser!.displayName ?? 'Unknown',
         to_name: to_userData.displayName,
-        from_avtar: user.photoUrl,
+        from_avtar: FirebaseAuth.instance.currentUser!.photoURL ?? '',
         to_avtar: to_userData.photoUrl,
         last_msg: '',
         last_time: Timestamp.now(),

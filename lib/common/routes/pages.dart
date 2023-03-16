@@ -1,6 +1,7 @@
 import 'package:chat_app/common/middlewares/middlewares.dart';
 import 'package:chat_app/common/middlewares/router_welcome.dart';
 import 'package:chat_app/screens/contacts/index.dart';
+import 'package:chat_app/screens/message/chat/index.dart';
 import 'package:chat_app/screens/sign_in/bindings.dart';
 import 'package:chat_app/screens/sign_in/view.dart';
 import 'package:chat_app/screens/welcome/bindings.dart';
@@ -23,9 +24,7 @@ class AppPages {
         // RouteWelcomeMiddleware(priority: 1),
       ],
     ),
-  
- 
-     GetPage(
+    GetPage(
       name: AppRoutes.SIGN_IN,
       page: () => const SignInScreen(),
       binding: SignInBindings(),
@@ -33,8 +32,7 @@ class AppPages {
         // RouteWelcomeMiddleware(priority: 1),
       ],
     ),
-    
-     GetPage(
+    GetPage(
       name: AppRoutes.Application,
       page: () => ApplicationScreen(),
       binding: ApplicationBindings(),
@@ -42,11 +40,18 @@ class AppPages {
         // RouteWelcomeMiddleware(priority: 1),
       ],
     ),
-    
-     GetPage(
+    GetPage(
       name: AppRoutes.Contact,
       page: () => ContactsScreen(),
       binding: ContactBindings(),
+      middlewares: [
+        // RouteContactsMiddleware(priority: 1),
+      ],
+    ),
+    GetPage(
+      name: '/chat',
+      page: () => ChatScreen(),
+      binding: ChatBindings(),
       middlewares: [
         // RouteContactsMiddleware(priority: 1),
       ],

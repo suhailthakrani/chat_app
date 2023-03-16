@@ -59,7 +59,7 @@ dependencies:
   # Flutter plugin for accepting incoming links - App/Deep Links (Android), Universal Links and Custom URL schemes (iOS).
   uni_links: ^0.5.1
   # A crash reporting library for Dart that sends crash reports to Sentry.io
-  sentry: ^6.22.0
+  sentry: ^7.0.0
   # To handle the permission such as asking for camera or location
   permission_handler: ^10.2.0
   # It will provide the path of files stored in user files

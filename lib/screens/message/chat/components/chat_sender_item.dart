@@ -18,16 +18,23 @@ Widget chatRightWidget(MsgContent msgContent) {
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 230, maxHeight: 40),
           child: Container(
-            padding: EdgeInsets.only(
-                top: 10, left: 15, right: 15, bottom: 10),
-            margin: EdgeInsets.only(
-                top: 10, left: 15, right: 15, bottom: 10),
+            padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
+            margin: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
             decoration: BoxDecoration(
-              color: Colors.green.shade500,
+              color: Colors.green,
               borderRadius: BorderRadius.circular(10),
             ),
             child: msgContent.type == 'text'
-                ? Text("${msgContent.content}")
+                ? InkWell(
+                    onTap: () {
+                      print(msgContent.content);
+                      print("Clicked........................");
+                    },
+                    child: Text(
+                      (msgContent.content) ?? 'jjjj',
+                      style: TextStyle(fontSize: 14, color: Colors.black54),
+                    ),
+                  )
                 : ConstrainedBox(
                     constraints: BoxConstraints(
                       maxWidth: 80,

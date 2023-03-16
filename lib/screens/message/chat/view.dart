@@ -9,7 +9,6 @@ class ChatScreen extends GetView<ChatController> {
   const ChatScreen({super.key});
 
   AppBar _buildAppBar(context) {
-    
     return AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -27,7 +26,7 @@ class ChatScreen extends GetView<ChatController> {
                     height: 44,
                     width: 44,
                     child: CachedNetworkImage(
-                      imageUrl: controller.state.to_avtar.value,
+                      imageUrl: controller.state.to_avtar.value ,
                       errorWidget: (context, url, error) {
                         return Icon(
                           CupertinoIcons.person_alt_circle,
@@ -107,62 +106,65 @@ class ChatScreen extends GetView<ChatController> {
       body: SafeArea(
         child: ConstrainedBox(
           constraints: BoxConstraints.expand(),
-          child: Stack(
-            children: [
-              ChatList(),
-              Positioned(
-                bottom: 0,
-                height: 50,
-                child: Container(
-                  width: 360,
-                  height: 58,
-                  color: Colors.white,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 217,
-                        height: 50,
-                        child: TextField(
-                          controller: controller.textMessageController,
-                          autofocus: false,
-                          focusNode: controller.contentMode,
-                          decoration: InputDecoration(
-                            hintText: 'Send messages...',
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Stack(
+              children: [
+                ChatList(),
+                Positioned(
+                  bottom: 0,
+                  height: 50,
+                  child: Container(
+                    width: 360,
+                    height: 58,
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 217,
+                          height: 50,
+                          child: TextField(
+                            controller: controller.textMessageController,
+                            autofocus: false,
+                            focusNode: controller.contentMode,
+                            decoration: InputDecoration(
+                              hintText: 'Send messages...',
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        height: 30,
-                        width: 30,
-                        margin: EdgeInsets.only(left: 5),
-                        child: GestureDetector(
-                          onTap: () {
-                            // Implement later
-                          },
-                          child: Icon(
-                            Icons.image_outlined,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                          left: 10,
-                          top: 5,
-                        ),
-                        width: 64,
-                        height: 35,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              controller.sendMessage();
+                        Container(
+                          height: 30,
+                          width: 30,
+                          margin: EdgeInsets.only(left: 5),
+                          child: GestureDetector(
+                            onTap: () {
+                              // Implement later
                             },
-                            child: Text('Send')),
-                      )
-                    ],
+                            child: Icon(
+                              Icons.image_outlined,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            left: 10,
+                            top: 5,
+                          ),
+                          width: 64,
+                          height: 35,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                controller.sendMessage();
+                              },
+                              child: Text('Send')),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

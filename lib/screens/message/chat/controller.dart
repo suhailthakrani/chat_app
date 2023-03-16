@@ -70,35 +70,36 @@ class ChatController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    var messages = db.collection('messages').doc(doc_id).collection('msglist').withConverter(
+    var messages = db
+        .collection('messages')
+        .doc(doc_id)
+        .collection('msglist')
+        .withConverter(
           fromFirestore: MsgContent.fromFirestore,
           toFirestore: (MsgContent msgContent, options) =>
               msgContent.toFirestore(),
-        ).orderBy('addTime', descending: true)
-        
-        ;
-        state.messageContentList.clear();
-        listener = messages.snapshots().listen((event) { 
-          for (var change in event.docChanges) {
-            switch (change.type) {
-              case DocumentChangeType.added:
-                if(change.doc.data() != null) {
-                  state.messageContentList.insert(0, change.doc.data()!);
-                }
-                break;
-              case DocumentChangeType.modified:
-                break;
-              case DocumentChangeType.removed:
-                break;
-              default:
+        )
+        .orderBy('addTime', descending: true);
+    print(messages);
+    state.messageContentList.clear();
+    listener = messages.snapshots().listen((event) {
+      for (var change in event.docChanges) {
+        switch (change.type) {
+          case DocumentChangeType.added:
+            if (change.doc.data() != null) {
+              state.messageContentList.insert(0, change.doc.data()!);
             }
-          }
-         },
-         onError: (error)=> print("Listen Faild:  ${error}")
-         );
-         
-
+            break;
+          case DocumentChangeType.modified:
+            break;
+          case DocumentChangeType.removed:
+            break;
+          default:
+        }
+      }
+    }, onError: (error) => print("Listen Faild:  ${error}"));
   }
+
   @override
   void dispose() {
     messagesScrollController.dispose();

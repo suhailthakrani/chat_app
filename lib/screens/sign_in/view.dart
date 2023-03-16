@@ -80,7 +80,6 @@ class SignInScreen extends GetView<SignInController> {
               controller: controller.emailController,
               label: 'Email',
               icon: Icons.email,
-              
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(
@@ -90,7 +89,6 @@ class SignInScreen extends GetView<SignInController> {
               controller: controller.passwordController,
               label: 'Password',
               icon: Icons.lock,
-              
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(
@@ -98,9 +96,11 @@ class SignInScreen extends GetView<SignInController> {
             ),
             ElevatedButton(
               onPressed: () {
-                controller.signInWithEmailAndPassword();
+                controller.signInWithEmailAndPassword().then(
+                      (value) => Get.offAndToNamed(AppRoutes.Application),
+                );
               },
-              child: Text('Continue with Email'),
+              child: const Text('Continue with Email',),
             ),
             _buildSignInWidget(),
           ],
@@ -128,3 +128,10 @@ class SignInScreen extends GetView<SignInController> {
     );
   }
 }
+
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 # chat_app
 
-A new Flutter project.
+In this App I didn't focus on UI first, all I wanted to implement functionality and architecture of the app and Getx. 
+UI will be updated later!.
 
 ## Getting Started
 

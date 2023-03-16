@@ -9,26 +9,30 @@ class ChatList extends GetView<ChatController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
-      color: Colors.grey.shade500,
-      padding: EdgeInsets.only(bottom: 50),
-      child: CustomScrollView(
-        reverse: true,
-        controller: controller.messagesScrollController,
-        slivers: [
-          SliverPadding(padding:EdgeInsets.symmetric(horizontal: 0, vertical: 0,),
-          sliver: SliverList(delegate: SliverChildBuilderDelegate(
-            childCount: controller.state.messageContentList.length,
-            
-            (context, index) {
-            var item = controller.state.messageContentList[index];
-            if (controller.user_id  == item.uid) {
-              return chatRightWidget(item);
-            }
-            return null;
-          })),
-          )
-        ],
-      ),
-    ));
+          color: Colors.white,
+          padding: EdgeInsets.only(bottom: 50),
+          child: CustomScrollView(
+            reverse: true,
+            controller: controller.messagesScrollController,
+            slivers: [
+              SliverPadding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 0,
+                  vertical: 0,
+                ),
+                sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                        childCount: controller.state.messageContentList.length,
+                        (context, index) {
+                  var item = controller.state.messageContentList[index];
+                  if (controller.user_id == item.uid) {
+                    return chatRightWidget(item);
+                  }
+                  return null;
+                })),
+              )
+            ],
+          ),
+        ));
   }
 }
