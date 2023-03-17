@@ -3,7 +3,7 @@ import 'package:chat_app/screens/application/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 
-Widget chatSenderWidget(MsgContent msgContent) {
+Widget chatRecieverWidget(MsgContent msgContent) {
   return Container(
     padding: EdgeInsets.only(
       top: 10,
@@ -12,7 +12,7 @@ Widget chatSenderWidget(MsgContent msgContent) {
       bottom: 10,
     ),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         // Outer Contrainet Box
         ConstrainedBox(

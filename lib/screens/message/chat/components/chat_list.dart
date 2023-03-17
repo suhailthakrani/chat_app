@@ -1,3 +1,4 @@
+import 'package:chat_app/screens/message/chat/components/chat_reciever_item.dart';
 import 'package:chat_app/screens/message/chat/components/chat_sender_item.dart';
 import 'package:chat_app/screens/message/chat/index.dart';
 
@@ -27,13 +28,10 @@ class ChatList extends GetView<ChatController> {
                   var item = controller.state.messageContentList[index];
 
                   if (controller.user_id == item.uid) {
-                    print(item.addTime);
-                    print(item.content);
-                    print(item.uid);
-                    print(item.type);
-                    return chatRightWidget(item);
+                    return chatSenderWidget(item);
+                  } else {
+                    return chatRecieverWidget(item);
                   }
-                  return null;
                 })),
               )
             ],

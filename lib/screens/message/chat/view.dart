@@ -28,10 +28,21 @@ class ChatScreen extends GetView<ChatController> {
                       height: 44,
                       width: 44,
                       child: CachedNetworkImage(
-                        imageUrl: controller.state.to_avtar.value,
+                        imageUrl: (controller.state.to_avtar.value) == ''
+                            ? 'assets/images/profile.png'
+                            : (controller.state.to_avtar.value),
                         errorWidget: (context, url, error) {
-                          return Icon(
-                            CupertinoIcons.person_alt_circle,
+                          return Image.asset('assets/images/profile.png');
+                        },
+                        imageBuilder: (context, imageProvider) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           );
                         },
                       ),
@@ -144,7 +155,10 @@ class ChatScreen extends GetView<ChatController> {
                           height: 35,
                           child: ElevatedButton(
                               onPressed: () {
-                                controller.sendMessage();
+                                if (controller.textMessageController.text !=
+                                    '') {
+                                  controller.sendMessage();
+                                }
                               },
                               child: Text('Send')),
                         )
