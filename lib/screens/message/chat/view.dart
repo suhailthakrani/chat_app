@@ -8,6 +8,32 @@ import 'index.dart';
 class ChatScreen extends GetView<ChatController> {
   const ChatScreen({super.key});
 
+  void _showImagePickerSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SafeArea(
+            child: Wrap(
+          children: [
+            ListTile(
+              leading: Icon(Icons.photo_library),
+              title: Text("Gallery"),
+              onTap: () {
+                controller.getImageFromGallery();
+                Get.back();
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.photo_camera),
+              title: Text("Camera"),
+              onTap: () {},
+            )
+          ],
+        ));
+      },
+    );
+  }
+
   AppBar _buildAppBar(context) {
     return AppBar(
         backgroundColor: Colors.transparent,
@@ -138,7 +164,7 @@ class ChatScreen extends GetView<ChatController> {
                           margin: EdgeInsets.only(left: 5),
                           child: GestureDetector(
                             onTap: () {
-                              // Implement later
+                              _showImagePickerSheet(context);
                             },
                             child: Icon(
                               Icons.image_outlined,
@@ -147,20 +173,20 @@ class ChatScreen extends GetView<ChatController> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                             left: 10,
                             top: 5,
                           ),
                           width: 64,
                           height: 35,
                           child: ElevatedButton(
-                              onPressed: () {
-                                if (controller.textMessageController.text !=
-                                    '') {
-                                  controller.sendMessage();
-                                }
-                              },
-                              child: Text('Send')),
+                            onPressed: () {
+                              if (controller.textMessageController.text != '') {
+                                controller.sendMessage();
+                              }
+                            },
+                            child: const Text('Send'),
+                          ),
                         )
                       ],
                     ),
