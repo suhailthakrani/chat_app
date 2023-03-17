@@ -47,7 +47,7 @@ class ChatController extends GetxController {
 
   Future uploadFile() async {
     if (_photo != null) {
-      final fileName = getRandomString(15) + path.extension(_photo!.path);
+      final fileName = "${getRandomString(15)} ${path.extension(_photo!.path)}";
 
       try {
         final ref = FirebaseStorage.instance.ref('chat').child(fileName);

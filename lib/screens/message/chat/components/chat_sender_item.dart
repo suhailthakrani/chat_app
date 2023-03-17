@@ -18,7 +18,9 @@ Widget chatSenderWidget(MsgContent msgContent) {
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 230, maxHeight: 100),
           child: Container(
-            padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
+            padding: msgContent.type == 'text'
+                ? EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10)
+                : EdgeInsets.all(2),
             margin: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
             decoration: BoxDecoration(
               color: Colors.green,
@@ -44,7 +46,7 @@ Widget chatSenderWidget(MsgContent msgContent) {
                         //
                       },
                       child: CachedNetworkImage(
-                        imageUrl: "",
+                        imageUrl: msgContent.content,
                         errorWidget: (context, url, error) {
                           return Icon(
                             Icons.error_outline,
@@ -52,11 +54,12 @@ Widget chatSenderWidget(MsgContent msgContent) {
                         },
                         imageBuilder: (context, imageProvider) {
                           return Container(
-                            height: 44,
-                            width: 44,
+                            // height: 44,
+                            // width: 44,
                             margin: null,
+                            padding: null,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(44),
+                              borderRadius: BorderRadius.circular(8),
                               image: DecorationImage(
                                 image: imageProvider,
                                 fit: BoxFit.cover,
