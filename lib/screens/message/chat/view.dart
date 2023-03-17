@@ -16,11 +16,7 @@ class ChatScreen extends GetView<ChatController> {
           decoration: BoxDecoration(color: Theme.of(context).primaryColor),
         ),
         title: InkWell(
-          onTap: () {
-            print(controller.state.messageContentList.first.content == ''
-                ? "jjjjjjjjjjj"
-                : controller.state.messageContentList.first.content);
-          },
+          onTap: () {},
           child: Padding(
             padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
             child: Row(
@@ -34,27 +30,8 @@ class ChatScreen extends GetView<ChatController> {
                       child: CachedNetworkImage(
                         imageUrl: controller.state.to_avtar.value,
                         errorWidget: (context, url, error) {
-                          return InkWell(
-                            onTap: () {
-                              // print(controller.state.messageContentList);
-                            },
-                            child: Icon(
-                              CupertinoIcons.person_alt_circle,
-                            ),
-                          );
-                        },
-                        imageBuilder: (context, imageProvider) {
-                          return Container(
-                            height: 44,
-                            width: 44,
-                            margin: null,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(44),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                          return Icon(
+                            CupertinoIcons.person_alt_circle,
                           );
                         },
                       ),

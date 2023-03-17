@@ -1,11 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:chat_app/common/entities/message_content.dart';
-import 'package:chat_app/common/entities/user_data.dart';
-import 'package:chat_app/common/entities/user_model.dart';
 
-import '../../../common/entities/message_data.dart';
 import 'index.dart';
 
 class ChatController extends GetxController {
@@ -14,14 +12,14 @@ class ChatController extends GetxController {
 
   //
   final textMessageController = TextEditingController();
-  ScrollController messagesScrollController = ScrollController();
-  FocusNode contentMode = FocusNode();
+  final messagesScrollController = ScrollController();
+  final contentMode = FocusNode();
   final db = FirebaseFirestore.instance;
   final user_id = UserStore.to.token;
 
-  var listener;
+  late StreamSubscription<QuerySnapshot> listener;
   //
-  var doc_id;
+  late String doc_id;
 
   @override
   void onInit() {
@@ -45,7 +43,7 @@ class ChatController extends GetxController {
       addTime: Timestamp.now(),
     );
 
-    await db
+    db
         .collection('messages')
         .doc(doc_id)
         .collection('msglist')
@@ -68,7 +66,7 @@ class ChatController extends GetxController {
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
     print("LOADING MESSAGES.....");
     var messages = db
@@ -81,14 +79,20 @@ class ChatController extends GetxController {
               msgContent.toFirestore(),
         )
         .orderBy('addTime', descending: true);
-    print("AAAAAAAAAAAAAAAA ${messages.count().get()}");
-    state.messageContentList.clear();
+
+    if (state.messageContentList.isNotEmpty) {
+      state.messageContentList.clear();
+    }
+
+
     listener = messages.snapshots().listen((event) {
       for (var change in event.docChanges) {
         switch (change.type) {
           case DocumentChangeType.added:
             if (change.doc.data() != null) {
               state.messageContentList.insert(0, change.doc.data()!);
+              print(
+                  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ${state.messageContentList}");
             }
             break;
           case DocumentChangeType.modified:

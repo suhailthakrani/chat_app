@@ -1,11 +1,8 @@
-
-
 import 'index.dart';
 
-class ChatBindings implements Bindings{
+class ChatBindings implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ChatController>(() => ChatController());
+    Get.put<ChatController>(ChatController());
   }
-
 }

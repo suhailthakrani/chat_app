@@ -39,12 +39,10 @@ class UserStore extends GetxController {
   }
 
   Future<String> getProfile() async {
-    
     if (token.isEmpty) return '';
-    var key = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
-  
-    
-    return key.replaceAll('\\', '');
+    String key = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
+    String finalKey = key.replaceAll('\\', '');
+    return finalKey.substring(1, finalKey.length - 1);
   }
 
   saveProfile(UserModel user) {
