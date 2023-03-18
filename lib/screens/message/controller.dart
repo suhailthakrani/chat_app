@@ -14,6 +14,23 @@ class MessageController extends GetxController {
   final RefreshController refreshController =
       RefreshController(initialRefresh: true);
 
+void onLoading() {
+    loadMessages().then((_) {
+      refreshController.loadComplete();
+    }).catchError(
+      (_) => refreshController.loadFailed(),
+    );
+  }
+  
+// To refresh the messages 
+  void onRefresh() {
+    loadMessages().then((_) {
+      refreshController.refreshCompleted(resetFooterState: true);
+    }).catchError(
+      (_) => refreshController.refreshFailed(),
+    );
+  }
+
   loadMessages() async {
     var from_messages = await db
         .collection('messages')
@@ -31,5 +48,15 @@ class MessageController extends GetxController {
         )
         .where('to_uid', isEqualTo: token)
         .get();
+
+    if (messageState.messageList.isNotEmpty) {
+      messageState.messageList.clear();
+    }
+    if (from_messages.docs.isNotEmpty) {
+      messageState.messageList.assignAll(from_messages.docs);
+    }
+    if (to_messages.docs.isNotEmpty) {
+      messageState.messageList.assignAll(to_messages.docs);
+    }
   }
 }

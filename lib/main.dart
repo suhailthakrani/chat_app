@@ -4,6 +4,7 @@ import 'package:chat_app/common/services/storage.dart';
 import 'package:chat_app/common/store/config.dart';
 import 'package:chat_app/common/store/user_store.dart';
 import 'package:chat_app/firebase_options.dart';
+import 'package:chat_app/screens/message/controller.dart';
 import 'package:chat_app/screens/welcome/controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ Future<void> main() async {
   Get.put<ConfigStrore>(ConfigStrore());
   Get.put(WelcomeController());
   Get.put<UserStore>(UserStore());
+  // Get.put<MessageController>(MessageController());
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -29,11 +31,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    
     return GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              initialRoute: AppRoutes.SIGN_IN,
-              getPages: AppPages.routes,
-            );
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.SIGN_IN,
+      getPages: AppPages.routes,
+    );
   }
 }

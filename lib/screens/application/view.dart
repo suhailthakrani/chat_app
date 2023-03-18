@@ -1,4 +1,5 @@
 import 'package:chat_app/screens/application/controller.dart';
+import 'package:chat_app/screens/message/view.dart';
 import 'package:chat_app/screens/sign_in/controller.dart';
 import 'package:chat_app/screens/sign_in/index.dart';
 import 'package:chat_app/screens/welcome/index.dart';
@@ -22,10 +23,7 @@ class ApplicationScreen extends GetView<ApplicationController> {
         controller: controller.pageController,
         onPageChanged: controller.onPageChanged,
         children: [
-          Center(
-              child: Container(
-            child: Text("Chat"),
-          )),
+          MessageScreen(),
           ContactsScreen(),
           Center(
               child: Container(
