@@ -1,3 +1,4 @@
+import 'package:chat_app/common/constants/colors.dart';
 import 'package:chat_app/screens/contacts/components/contact_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/screens/message/chat/components/chat_list.dart';
@@ -37,6 +38,7 @@ class ChatScreen extends GetView<ChatController> {
   AppBar _buildAppBar(context) {
     return AppBar(
         backgroundColor: Colors.transparent,
+        titleSpacing: -5,
         elevation: 0,
         flexibleSpace: Container(
           decoration: BoxDecoration(color: Theme.of(context).primaryColor),
@@ -78,7 +80,7 @@ class ChatScreen extends GetView<ChatController> {
                 SizedBox(width: 15),
                 Container(
                   width: 180,
-                  padding: EdgeInsets.only(top: 0, bottom: 0, right: 0),
+                  padding: EdgeInsets.only(top: 8, bottom: 5, right: 0),
                   child: Row(
                     children: [
                       SizedBox(
@@ -90,7 +92,7 @@ class ChatScreen extends GetView<ChatController> {
                           },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text(
                                 controller.state.to_name.value,
@@ -109,7 +111,7 @@ class ChatScreen extends GetView<ChatController> {
                                 style: TextStyle(
                                   fontFamily: 'Avenir',
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                                  fontSize: 12,
                                 ),
                               )
                             ],
@@ -139,15 +141,16 @@ class ChatScreen extends GetView<ChatController> {
                 ChatList(),
                 Positioned(
                   bottom: 0,
+                  left: 5,
                   height: 50,
                   child: Container(
-                    width: 360,
+                    width: MediaQuery.of(context).size.width,
                     height: 58,
                     color: Colors.white,
                     child: Row(
                       children: [
                         Container(
-                          width: 217,
+                          width: 227,
                           height: 50,
                           child: TextField(
                             controller: controller.textMessageController,
@@ -177,16 +180,22 @@ class ChatScreen extends GetView<ChatController> {
                             left: 10,
                             top: 5,
                           ),
-                          width: 64,
-                          height: 35,
+                          width: 48,
+                          height: 45,
                           child: ElevatedButton(
-                            onPressed: () {
-                              if (controller.textMessageController.text != '') {
-                                controller.sendMessage();
-                              }
-                            },
-                            child: const Text('Send'),
-                          ),
+                              style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.only(left: 5, right: 1),
+                                  backgroundColor: AppColors.primarColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  )),
+                              onPressed: () {
+                                if (controller.textMessageController.text !=
+                                    '') {
+                                  controller.sendMessage();
+                                }
+                              },
+                              child: Icon(Icons.send, color: Colors.white)),
                         )
                       ],
                     ),

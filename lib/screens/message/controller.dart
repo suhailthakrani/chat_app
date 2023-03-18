@@ -6,6 +6,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MessageController extends GetxController {
+   MessageController();
   final token = UserStore.to.token;
   final db = FirebaseFirestore.instance;
 

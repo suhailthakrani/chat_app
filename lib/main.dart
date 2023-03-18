@@ -17,11 +17,11 @@ Future<void> main() async {
   Get.put<ConfigStrore>(ConfigStrore());
   Get.put(WelcomeController());
   Get.put<UserStore>(UserStore());
-  // Get.put<MessageController>(MessageController());
+
 
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
   runApp(const MyApp());
 }
 
