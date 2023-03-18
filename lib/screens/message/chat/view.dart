@@ -150,7 +150,7 @@ class ChatScreen extends GetView<ChatController> {
                     child: Row(
                       children: [
                         Container(
-                          width: 227,
+                          width: MediaQuery.of(context).size.width - 120,
                           height: 50,
                           child: TextField(
                             controller: controller.textMessageController,
@@ -171,7 +171,7 @@ class ChatScreen extends GetView<ChatController> {
                             },
                             child: Icon(
                               Icons.image_outlined,
-                              color: Colors.blue,
+                              color: AppColors.primarColor,
                             ),
                           ),
                         ),
