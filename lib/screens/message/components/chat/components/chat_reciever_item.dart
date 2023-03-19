@@ -18,7 +18,7 @@ Widget chatRecieverWidget(MsgContent msgContent) {
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 230, maxHeight: 100),
           child: Container(
-            padding:  msgContent.type == 'text'
+            padding: msgContent.type == 'text'
                 ? EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10)
                 : EdgeInsets.all(2),
             margin: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
@@ -38,17 +38,18 @@ Widget chatRecieverWidget(MsgContent msgContent) {
                     ),
                   )
                 : ConstrainedBox(
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       maxWidth: 80,
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        //
+                        Get.toNamed(AppRoutes.PhotoImageView,
+                            parameters: {"imgUel": msgContent.content});
                       },
                       child: CachedNetworkImage(
-                          imageUrl: msgContent.content,
+                        imageUrl: msgContent.content,
                         errorWidget: (context, url, error) {
-                          return Icon(
+                          return const Icon(
                             Icons.error_outline,
                           );
                         },

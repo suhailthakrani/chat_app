@@ -1,6 +1,6 @@
-import 'package:chat_app/screens/message/chat/components/chat_reciever_item.dart';
-import 'package:chat_app/screens/message/chat/components/chat_sender_item.dart';
-import 'package:chat_app/screens/message/chat/index.dart';
+import 'package:chat_app/screens/message/components/chat/components/chat_reciever_item.dart';
+import 'package:chat_app/screens/message/components/chat/components/chat_sender_item.dart';
+import 'package:chat_app/screens/message/components/chat/index.dart';
 
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -1,8 +1,7 @@
-import 'package:chat_app/common/middlewares/middlewares.dart';
 import 'package:chat_app/common/middlewares/router_welcome.dart';
 import 'package:chat_app/screens/contacts/index.dart';
 import 'package:chat_app/screens/message/bindings.dart';
-import 'package:chat_app/screens/message/chat/index.dart';
+import 'package:chat_app/screens/message/components/chat/index.dart';
 import 'package:chat_app/screens/message/view.dart';
 import 'package:chat_app/screens/sign_in/bindings.dart';
 import 'package:chat_app/screens/sign_in/view.dart';
@@ -10,7 +9,7 @@ import 'package:chat_app/screens/welcome/bindings.dart';
 import 'package:chat_app/screens/welcome/view.dart';
 
 import '../../screens/application/index.dart';
-import '../../screens/contacts/middlewares.dart';
+import '../../screens/message/components/photoview/index.dart';
 
 class AppPages {
   static const INITIAL = AppRoutes.INITIAL;
@@ -67,15 +66,15 @@ class AppPages {
         // RouteWelcomeMiddleware(priority: 1),
       ],
     ),
-    /*
+    
      GetPage(
-      name: AppRoutes.INITIAL,
-      page: () => WelcomeScreen(),
-      binding: WelcomeBinding(),
+      name: AppRoutes.PhotoImageView,
+      page: () => const PhotoViewScreen(),
+      binding: PhotoViewBindings(),
       middlewares: [
         RouteWelcomeMiddleware(priority: 1),
       ],
     ),
-    */
+    
   ];
 }

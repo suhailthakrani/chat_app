@@ -1,7 +1,7 @@
 import 'package:chat_app/common/constants/colors.dart';
 import 'package:chat_app/screens/contacts/components/contact_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chat_app/screens/message/chat/components/chat_list.dart';
+import 'package:chat_app/screens/message/components/chat/components/chat_list.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'index.dart';
@@ -169,7 +169,7 @@ class ChatScreen extends GetView<ChatController> {
                             onTap: () {
                               _showImagePickerSheet(context);
                             },
-                            child: Icon(
+                            child: const Icon(
                               Icons.image_outlined,
                               color: AppColors.primarColor,
                             ),
@@ -183,19 +183,20 @@ class ChatScreen extends GetView<ChatController> {
                           width: 48,
                           height: 45,
                           child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.only(left: 5, right: 1),
-                                  backgroundColor: AppColors.primarColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  )),
-                              onPressed: () {
-                                if (controller.textMessageController.text !=
-                                    '') {
-                                  controller.sendMessage();
-                                }
-                              },
-                              child: Icon(Icons.send, color: Colors.white)),
+                            style: ElevatedButton.styleFrom(
+                                padding:
+                                    const EdgeInsets.only(left: 5, right: 1),
+                                backgroundColor: AppColors.primarColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                )),
+                            onPressed: () {
+                              if (controller.textMessageController.text != '') {
+                                controller.sendMessage();
+                              }
+                            },
+                            child: const Icon(Icons.send, color: Colors.white),
+                          ),
                         )
                       ],
                     ),

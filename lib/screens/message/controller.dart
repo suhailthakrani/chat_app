@@ -1,12 +1,14 @@
+
 import 'package:chat_app/common/entities/message_data.dart';
 import 'package:chat_app/screens/application/index.dart';
 import 'package:chat_app/screens/message/state.dart';
-import 'package:chat_app/screens/message/view.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:location/location.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MessageController extends GetxController {
-   MessageController();
+  MessageController();
   final token = UserStore.to.token;
   final db = FirebaseFirestore.instance;
 
@@ -15,15 +17,15 @@ class MessageController extends GetxController {
   final RefreshController refreshController =
       RefreshController(initialRefresh: true);
 
-void onLoading() {
+  void onLoading() {
     loadMessages().then((_) {
       refreshController.loadComplete();
     }).catchError(
       (_) => refreshController.loadFailed(),
     );
   }
-  
-// To refresh the messages 
+
+// To refresh the messages
   void onRefresh() {
     loadMessages().then((_) {
       refreshController.refreshCompleted(resetFooterState: true);
@@ -59,5 +61,48 @@ void onLoading() {
     if (to_messages.docs.isNotEmpty) {
       messageState.messageList.assignAll(to_messages.docs);
     }
+  }
+
+  //
+  getFcmToken() async {
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    if (fcmToken != null) {
+      var user = await db.collection('users').where('id', isEqualTo: token).get();
+      if (user.docs.isNotEmpty) {
+        var doc_id = user.docs.first.id;
+        await db.collection('users').doc(doc_id).update({
+          'fcmToken': fcmToken,
+        });
+      }
+    }
+  }
+
+  //
+  // To get user location
+  getUserLocation() async {
+    try {
+      String key = "AIzaSyDk1EmlRdmQW-QXW8NoTSRlzMjs5x4pMk0";
+      final location = await Location().getLocation();
+      String address = "${location.latitude} ${location.latitude}";
+      String url =
+          "https://maps.googleapis.com/maps/api/geocode/json?address=$address&key=$key";
+      // var response = await HttpUtil().get(url);
+      // MyLocation location_response = MyLocation.fromJson(json.decode(response.body));
+    } catch (error) {
+      print("[Error in fectching data from apis]: $error.");
+    }
+  }
+}
+
+class HttpUtil {
+  static final HttpUtil _instance = HttpUtil._internal();
+  factory HttpUtil() => _instance;
+  late Dio dio;
+  HttpUtil._internal() {
+    BaseOptions options = BaseOptions(
+      baseUrl: 'SERVER_API_URL',
+      connectTimeout: const Duration(milliseconds: 10000),
+      receiveTimeout: const Duration(milliseconds: 5000),
+    );
   }
 }

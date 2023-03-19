@@ -1,4 +1,4 @@
-library contacts;
+library photoview;
 export './state.dart';
 export './view.dart';
 export './bindings.dart';
@@ -18,4 +18,3 @@ export 'package:flutter/material.dart';
 export 'package:get/get.dart';
 export 'package:google_sign_in/google_sign_in.dart';
 
-export '../../../common/store/user_store.dart';

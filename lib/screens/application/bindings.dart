@@ -5,7 +5,7 @@ import 'package:chat_app/screens/welcome/controller.dart';
 import 'package:get/get.dart';
 
 import '../contacts/index.dart';
-import '../message/chat/index.dart';
+import '../message/components/chat/index.dart';
 
 class ApplicationBindings implements Bindings {
   @override
