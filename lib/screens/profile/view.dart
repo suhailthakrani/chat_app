@@ -24,8 +24,7 @@ class ProfileScreen extends GetView<ProfileController> {
   Widget myItem(MeListItem item) {
     return Container(
       height: 56,
-      color: Colors.purple,
-      margin: EdgeInsets.only(bottom: 1),
+      margin: EdgeInsets.only(bottom: 10),
       padding: EdgeInsets.only(
         top: 0,
         left: 15,
@@ -69,14 +68,19 @@ class ProfileScreen extends GetView<ProfileController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  height: 56,
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    item.icon ?? "assets/images/profile.png",
-                    height: 40,
-                    width: 40,
-                  ),
-                ),
+                    height: 56,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 20,
+                    )
+
+                    // Image.asset(
+                    //   item.icon ?? "assets/images/profile.png",
+                    //   height: 40,
+                    //   width: 40,
+                    // ),
+                    ),
               ],
             ),
           ],
@@ -89,29 +93,32 @@ class ProfileScreen extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: Obx(() => CustomScrollView(
-            slivers: [
-              SliverPadding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                  sliver: SliverToBoxAdapter(
-                    child: controller.state.head_detail.value == null
-                        ? Container()
-                        : headItem(controller.state.head_detail.value!,),
-                  )),
-              SliverPadding(
+      body: Obx(
+        () => CustomScrollView(
+          slivers: [
+            SliverPadding(
                 padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                      childCount: controller.state.meListItem.length,
-                      (context, index) {
-                    var item = controller.state.meListItem[index];
-                    return myItem(item);
-                  }),
-                ),
+                sliver: SliverToBoxAdapter(
+                  child: controller.state.head_detail.value == null
+                      ? Container()
+                      : headItem(
+                          controller.state.head_detail.value!,
+                        ),
+                )),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                    childCount: controller.state.meListItem.length,
+                    (context, index) {
+                  var item = controller.state.meListItem[index];
+                  return myItem(item);
+                }),
               ),
-            ],
-          ),),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

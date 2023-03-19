@@ -1,6 +1,5 @@
 
 import 'package:chat_app/screens/sign_in/controller.dart';
-import 'package:chat_app/screens/welcome/controller.dart';
 import 'package:get/get.dart';
 
 class SignInBindings implements Bindings{

@@ -27,6 +27,11 @@ class PhotoViewScreen extends GetView<PhotoViewImageController> {
       appBar: _buildAppBar(),
       body: Center(
         child: PhotoView(
+          loadingBuilder: (context, event) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
           imageProvider: NetworkImage(controller.state.imgUrl.value),
         ),
       ),

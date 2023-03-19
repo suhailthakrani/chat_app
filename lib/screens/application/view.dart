@@ -20,7 +20,7 @@ class ApplicationScreen extends GetView<ApplicationController> {
     Widget _buildPageView() {
       return PageView(
         scrollDirection: Axis.horizontal,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: controller.pageController,
         onPageChanged: controller.onPageChanged,
         children: const [
@@ -32,19 +32,17 @@ class ApplicationScreen extends GetView<ApplicationController> {
     }
 
     Widget _buildBottomNavigation() {
-      return Obx(
-        () => BottomNavigationBar(
-          items: controller.bottomTabs,
-          currentIndex: controller.state.page,
-          type: BottomNavigationBarType.fixed,
-          onTap: controller.onNavBarTap,
-        ),
+      return BottomNavigationBar(
+        items: controller.bottomTabs,
+        currentIndex: controller.state.page,
+        type: BottomNavigationBarType.fixed,
+        onTap: controller.onNavBarTap,
       );
     }
 
-    return Scaffold(
-      body: _buildPageView(),
-      bottomNavigationBar: _buildBottomNavigation(),
-    );
+    return Obx(() => Scaffold(
+          body: _buildPageView(),
+          bottomNavigationBar: _buildBottomNavigation(),
+        ));
   }
 }

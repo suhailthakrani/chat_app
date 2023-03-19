@@ -1,4 +1,3 @@
-
 import 'package:chat_app/screens/message/index.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -166,7 +165,7 @@ String timeLineFormater(DateTime dateTime) {
     return "${difference.inMinutes} m ago";
   }
   if (difference.inHours < 24) {
-    return "${difference.inMinutes} h ago";
+    return "${difference.inHours} h ago";
   } else if (difference.inDays < 30) {
     return "${difference.inDays} d ago";
   } else if (difference.inDays < 365) {

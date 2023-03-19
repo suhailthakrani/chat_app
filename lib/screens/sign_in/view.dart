@@ -1,11 +1,4 @@
-import 'package:chat_app/common/routes/names.dart';
-import 'package:chat_app/screens/sign_in/controller.dart';
-import 'package:chat_app/screens/welcome/index.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:dots_indicator/dots_indicator.dart';
+import 'package:chat_app/screens/sign_in/index.dart';
 
 class SignInScreen extends GetView<SignInController> {
   const SignInScreen({super.key});
@@ -73,35 +66,45 @@ class SignInScreen extends GetView<SignInController> {
         padding: const EdgeInsets.all(30),
         alignment: Alignment.center,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Text(
+              "Welcome Back!",
+              style: TextStyle(
+                  fontFamily: 'Avenir',
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87),
+            ),
             // _buildLogo(),
-            Spacer(),
-            _buildTextField(
-              controller: controller.emailController,
-              label: 'Email',
-              icon: Icons.email,
-              keyboardType: TextInputType.emailAddress,
-            ),
+            // Spacer(),
+            // _buildTextField(
+            //   controller: controller.emailController,
+            //   label: 'Email',
+            //   icon: Icons.email,
+            //   keyboardType: TextInputType.emailAddress,
+            // ),
             const SizedBox(
-              height: 20,
+              height: 200,
             ),
-            _buildTextField(
-              controller: controller.passwordController,
-              label: 'Password',
-              icon: Icons.lock,
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                controller.signInWithEmailAndPassword().then(
-                      (value) => Get.offAndToNamed(AppRoutes.Application),
-                );
-              },
-              child: const Text('Continue with Email',),
-            ),
+            // _buildTextField(
+            //   controller: controller.passwordController,
+            //   label: 'Password',
+            //   icon: Icons.lock,
+            //   keyboardType: TextInputType.emailAddress,
+            // ),
+            // const SizedBox(
+            //   height: 30,
+            // ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     controller.signInWithEmailAndPassword().then(
+            //           (value) => Get.offAndToNamed(AppRoutes.Application),
+            //     );
+            //   },
+            //   child: const Text('Continue with Email',),
+            // ),
             _buildSignInWidget(),
           ],
         ),
@@ -128,10 +131,3 @@ class SignInScreen extends GetView<SignInController> {
     );
   }
 }
-
-
-
-
-
-
-

@@ -1,8 +1,5 @@
-import 'package:chat_app/screens/application/index.dart';
-import 'package:chat_app/screens/message/controller.dart';
+import 'package:chat_app/screens/message/index.dart';
 import 'package:chat_app/screens/message/message_list.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class MessageScreen extends GetView<MessageController> {
   const MessageScreen({super.key});

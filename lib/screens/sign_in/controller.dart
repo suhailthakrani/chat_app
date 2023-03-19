@@ -1,6 +1,7 @@
+import 'package:chat_app/screens/sign_in/index.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'index.dart';
+
 
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>['openid']);
 
