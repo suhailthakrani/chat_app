@@ -14,6 +14,6 @@ class AppRoutes {
   //For chat screen
   static const Chat = '/chat';
   //For image view 
-  static const PhotoImageView = '/photo_image_view';
+  static const photoImageView = '/photo_image_view';
 
 }

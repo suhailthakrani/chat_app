@@ -43,7 +43,7 @@ Widget chatRecieverWidget(MsgContent msgContent) {
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        Get.toNamed(AppRoutes.PhotoImageView,
+                        Get.toNamed(AppRoutes.photoImageView,
                             parameters: {"imgUel": msgContent.content});
                       },
                       child: CachedNetworkImage(

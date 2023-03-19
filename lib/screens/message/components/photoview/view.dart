@@ -1,8 +1,6 @@
-import 'package:chat_app/screens/contacts/components/contact_list.dart';
+import 'package:chat_app/screens/message/components/photoview/index.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
-import 'index.dart';
 
 class PhotoViewScreen extends GetView<PhotoViewImageController> {
   const PhotoViewScreen({super.key});

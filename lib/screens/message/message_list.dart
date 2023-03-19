@@ -1,6 +1,10 @@
 import 'package:chat_app/screens/message/index.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import '../message/index.dart';
 
 export 'package:intl/intl.dart';
 export 'package:pull_to_refresh/pull_to_refresh.dart';

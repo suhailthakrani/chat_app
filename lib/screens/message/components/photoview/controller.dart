@@ -1,7 +1,8 @@
 
 import 'package:chat_app/common/store/user_store.dart';
+import 'package:chat_app/screens/message/components/photoview/index.dart';
 
-import 'index.dart';
+
 
 class PhotoViewImageController extends GetxController {
   PhotoViewImageController();

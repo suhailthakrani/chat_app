@@ -68,11 +68,11 @@ class AppPages {
       ],
     ),
     GetPage(
-      name: AppRoutes.PhotoImageView,
+      name: AppRoutes.photoImageView,
       page: () => const PhotoViewScreen(),
       binding: PhotoViewBindings(),
       middlewares: [
-        RouteWelcomeMiddleware(priority: 1),
+        // RouteWelcomeMiddleware(priority: 1),
       ],
     ),
     GetPage(
@@ -80,7 +80,7 @@ class AppPages {
       page: () => const ProfileScreen(),
       binding: ProfileBindings(),
       middlewares: [
-        RouteWelcomeMiddleware(priority: 1),
+        // RouteWelcomeMiddleware(priority: 1),
       ],
     ),
   ];
