@@ -27,7 +27,7 @@ class ConfigStrore extends GetxController {
 
   //
   Future<void> getPlatform() async {
-    _platform = await Platform();
+    _platform = Platform();
   }
 
   //

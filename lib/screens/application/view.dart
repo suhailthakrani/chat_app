@@ -1,5 +1,6 @@
 import 'package:chat_app/screens/application/controller.dart';
 import 'package:chat_app/screens/message/view.dart';
+import 'package:chat_app/screens/profile/view.dart';
 import 'package:chat_app/screens/sign_in/controller.dart';
 import 'package:chat_app/screens/sign_in/index.dart';
 import 'package:chat_app/screens/welcome/index.dart';
@@ -22,18 +23,10 @@ class ApplicationScreen extends GetView<ApplicationController> {
         physics: NeverScrollableScrollPhysics(),
         controller: controller.pageController,
         onPageChanged: controller.onPageChanged,
-        children: [
+        children: const [
           MessageScreen(),
           ContactsScreen(),
-          Center(
-              child: Container(
-            child: GestureDetector(
-                onTap: () {
-                  print(FirebaseAuth.instance.currentUser!.email ??
-                      "No oooooooooooooooooooooooooo");
-                },
-                child: Text("Profile")),
-          )),
+          ProfileScreen(),
         ],
       );
     }
