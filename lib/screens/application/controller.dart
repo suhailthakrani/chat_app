@@ -25,6 +25,7 @@ class ApplicationController extends GetxController {
   ];
 
   //
+  bool _isInitialized = false;
   late final List<String> tabTitles;
   late final PageController pageController;
   late final List<BottomNavigationBarItem> bottomTabs;
@@ -33,12 +34,23 @@ class ApplicationController extends GetxController {
   void onInit() {
     tabTitles = ['Chat', 'Contact', 'Profile'];
     bottomTabs = tabItems;
-
     pageController = PageController(
-      initialPage: state.page,
+      initialPage: 0,
     );
+    
     super.onInit();
   }
+
+  // void initialize() {
+  //   if (!initialized) {
+  //     pageController = PageController(
+  //       initialPage: state.page,
+  //     );
+  //     // Do any other initialization tasks here
+  //     // For example, fetch data from a server or database
+  //     _isInitialized = true;
+  //   }
+  // }
 
   @override
   void dispose() {

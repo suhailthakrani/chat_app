@@ -1,11 +1,10 @@
-
 import 'package:chat_app/screens/message/index.dart';
 import 'package:get/get.dart';
-
 
 import '../../common/store/user_store.dart';
 export 'package:pull_to_refresh/pull_to_refresh.dart';
 export 'package:dio/dio.dart';
+
 class MessageController extends GetxController {
   MessageController();
   final token = UserStore.to.token;
@@ -22,6 +21,12 @@ class MessageController extends GetxController {
     }).catchError(
       (_) => refreshController.loadFailed(),
     );
+  }
+
+  @override
+  void onInit() {
+    loadMessages();
+    super.onInit();
   }
 
 // To refresh the messages
@@ -66,7 +71,8 @@ class MessageController extends GetxController {
   getFcmToken() async {
     final fcmToken = await FirebaseMessaging.instance.getToken();
     if (fcmToken != null) {
-      var user = await db.collection('users').where('id', isEqualTo: token).get();
+      var user =
+          await db.collection('users').where('id', isEqualTo: token).get();
       if (user.docs.isNotEmpty) {
         var doc_id = user.docs.first.id;
         await db.collection('users').doc(doc_id).update({

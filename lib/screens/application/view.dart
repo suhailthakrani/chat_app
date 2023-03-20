@@ -19,10 +19,12 @@ class ApplicationScreen extends GetView<ApplicationController> {
   Widget build(BuildContext context) {
     Widget _buildPageView() {
       return PageView(
+        
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),
         controller: controller.pageController,
         onPageChanged: controller.onPageChanged,
+      
         children: const [
           MessageScreen(),
           ContactsScreen(),
