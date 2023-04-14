@@ -14,7 +14,7 @@ class MessageList extends GetView<MessageController> {
   Widget messageListItem(QueryDocumentSnapshot<Msg> item) {
     return Container(
       padding: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             width: 1,
@@ -131,52 +131,45 @@ class MessageList extends GetView<MessageController> {
   @override
   Widget build(BuildContext context) {
     return SmartRefresher(
-      controller: controller.refreshController,
-      enablePullDown: true,
-      enablePullUp: true,
-      onLoading: controller.onLoading,
-      onRefresh: controller.onRefresh,
-      header: const WaterDropHeader(),
-      child: FutureBuilder(
-        future: Future.value(controller.messageState.messageList.value),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.hasError) {
-            print(snapshot.error);
-          }
-          if (snapshot.connectionState == ConnectionState.waiting ||
-              snapshot.data == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
+        controller: controller.refreshController,
+        enablePullDown: true,
+        enablePullUp: true,
+        onLoading: controller.onLoading,
+        onRefresh: controller.onRefresh,
+        header: const WaterDropHeader(),
+        child: FutureBuilder(
+          future: controller.loadMessages(),
+          builder: (context, snapshot) {
+            return ListView.builder(
+              itemCount: controller.messageState.messageList.length,
+              itemBuilder: (context, index) {
+                if (controller.messageState.messageList.isNotEmpty) {
+                  var item = controller.messageState.messageList[index];
+                  return messageListItem(item);
+                }
+              },
             );
-          }
-          if (snapshot.hasData) {
-            return CustomScrollView(
-              slivers: [
-                SliverPadding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: controller.messageState.messageList.length,
-                      (context, index) {
-                        if (controller.messageState.messageList.isNotEmpty) {
-                          var item = controller.messageState.messageList[index];
-                          return messageListItem(item);
-                        }
-                      },
-                    ),
-                  ),
-                )
-              ],
-            );
-          } else {
-            return const Center(
-              child: Text("Something went wrong!"),
-            );
-          }
-        },
-      ),
-    );
+          },
+        )
+        // CustomScrollView(
+        //   slivers: [
+        //     SliverPadding(
+        //       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+        //       sliver: SliverList(
+        //         delegate: SliverChildBuilderDelegate(
+        //           childCount: controller.messageState.messageList.length,
+        //           (context, index) {
+        //             if (controller.messageState.messageList.isNotEmpty) {
+        //               var item = controller.messageState.messageList[index];
+        //               return messageListItem(item);
+        //             }
+        //           },
+        //         ),
+        //       ),
+        //     )
+        //   ],
+        // ),
+        );
   }
 }
 
