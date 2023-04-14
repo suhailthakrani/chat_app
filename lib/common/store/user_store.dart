@@ -42,6 +42,7 @@ class UserStore extends GetxController {
     if (token.isEmpty) return '';
     String key = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
     String finalKey = key.replaceAll('\\', '');
+    print("-------------------------------> $finalKey");
     return finalKey.substring(1, finalKey.length - 1);
   }
 

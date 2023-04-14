@@ -48,8 +48,10 @@ class ContactsController extends GetxController {
 
     if (from_messages.docs.isEmpty && to_messages.docs.isEmpty) {
       String profile = await UserStore.to.getProfile();
+      print("////////////////////////// $profile");
       UserModel userModel = UserModel.fromJson(profile);
-
+      print(
+          "================================------------->${userModel.toMap()}");
       Map<String, dynamic> mapProfile = jsonDecode(profile);
 
       /// TODO: Change from_uid, From_name, From_avatar
@@ -118,6 +120,6 @@ class ContactsController extends GetxController {
     for (var user in users.docs) {
       state.contactList.add(user.data());
     }
-    print(users);
+    notifyChildrens();
   }
 }

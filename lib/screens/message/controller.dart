@@ -21,6 +21,7 @@ class MessageController extends GetxController {
     }).catchError(
       (_) => refreshController.loadFailed(),
     );
+    notifyChildrens();
   }
 
   @override
@@ -33,13 +34,14 @@ class MessageController extends GetxController {
   void onRefresh() {
     loadMessages().then((_) {
       refreshController.refreshCompleted(resetFooterState: true);
+      notifyChildrens();
     }).catchError(
       (_) => refreshController.refreshFailed(),
     );
   }
 
   loadMessages() async {
-    var from_messages = await db
+    var fromMessages = await db
         .collection('messages')
         .withConverter(
           fromFirestore: Msg.fromFirestore,
@@ -47,7 +49,7 @@ class MessageController extends GetxController {
         )
         .where('from_uid', isEqualTo: token)
         .get();
-    var to_messages = await db
+    var toMessages = await db
         .collection('messages')
         .withConverter(
           fromFirestore: Msg.fromFirestore,
@@ -59,12 +61,14 @@ class MessageController extends GetxController {
     if (messageState.messageList.isNotEmpty) {
       messageState.messageList.clear();
     }
-    if (from_messages.docs.isNotEmpty) {
-      messageState.messageList.assignAll(from_messages.docs);
+    if (fromMessages.docs.isNotEmpty) {
+      messageState.messageList.assignAll(fromMessages.docs);
     }
-    if (to_messages.docs.isNotEmpty) {
-      messageState.messageList.assignAll(to_messages.docs);
+    if (toMessages.docs.isNotEmpty) {
+      messageState.messageList.assignAll(toMessages.docs);
     }
+
+    notifyChildrens();
   }
 
   //
@@ -80,6 +84,7 @@ class MessageController extends GetxController {
         });
       }
     }
+    notifyChildrens();
   }
 
   //

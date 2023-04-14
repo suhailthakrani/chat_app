@@ -137,23 +137,44 @@ class MessageList extends GetView<MessageController> {
       onLoading: controller.onLoading,
       onRefresh: controller.onRefresh,
       header: const WaterDropHeader(),
-      child: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                childCount: controller.messageState.messageList.length,
-                (context, index) {
-                  if (controller.messageState.messageList.isNotEmpty) {
-                    var item = controller.messageState.messageList[index];
-                    return messageListItem(item);
-                  }
-                },
-              ),
-            ),
-          )
-        ],
+      child: FutureBuilder(
+        future: Future.value(controller.messageState.messageList.value),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.hasError) {
+            print(snapshot.error);
+          }
+          if (snapshot.connectionState == ConnectionState.waiting ||
+              snapshot.data == null) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (snapshot.hasData) {
+            return CustomScrollView(
+              slivers: [
+                SliverPadding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: controller.messageState.messageList.length,
+                      (context, index) {
+                        if (controller.messageState.messageList.isNotEmpty) {
+                          var item = controller.messageState.messageList[index];
+                          return messageListItem(item);
+                        }
+                      },
+                    ),
+                  ),
+                )
+              ],
+            );
+          } else {
+            return const Center(
+              child: Text("Something went wrong!"),
+            );
+          }
+        },
       ),
     );
   }

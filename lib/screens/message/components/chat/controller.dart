@@ -75,6 +75,7 @@ class ChatController extends GetxController {
   Future getImgUrl(String name) async {
     final spaceRef = FirebaseStorage.instance.ref('chat').child(name);
     var url = await spaceRef.getDownloadURL();
+    notifyChildrens();
     return url;
   }
 
@@ -101,7 +102,41 @@ class ChatController extends GetxController {
     state.to_name.value = data['to_name'] ?? '';
     state.to_avtar.value = data['to_avtar'] ?? '';
     // state.to_name.value = data['to_name'] ?? '';
+     var messages = db
+        .collection('messages')
+        .doc(doc_id)
+        .collection('msglist')
+        .withConverter(
+          fromFirestore: MsgContent.fromFirestore,
+          toFirestore: (MsgContent msgContent, options) =>
+              msgContent.toFirestore(),
+        )
+        .orderBy('addTime', descending: true);
 
+    if (state.messageContentList.isNotEmpty) {
+      state.messageContentList.clear();
+    }
+
+    listener = messages.snapshots().listen((event) {
+      for (var change in event.docChanges) {
+        switch (change.type) {
+          case DocumentChangeType.added:
+            if (change.doc.data() != null) {
+              state.messageContentList.insert(0, change.doc.data()!);
+              print(
+                  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ${state.messageContentList}");
+            }
+            break;
+          case DocumentChangeType.modified:
+            break;
+          case DocumentChangeType.removed:
+            break;
+          default:
+        }
+      }
+      notifyChildrens();
+    }, onError: (error) => print("Listen Faild:  ${error}"));
+  
     super.onInit();
   }
 
@@ -132,6 +167,7 @@ class ChatController extends GetxController {
       'last_msg': "[image]",
       'last_time': Timestamp.now(),
     });
+    notifyChildrens();
   }
 
   // Send message
@@ -164,46 +200,15 @@ class ChatController extends GetxController {
       'last_msg': sendContent,
       'last_time': Timestamp.now(),
     });
+    notifyChildrens();
   }
 
-  @override
-  Future<void> onReady() async {
-    super.onReady();
-    print("LOADING MESSAGES.....");
-    var messages = db
-        .collection('messages')
-        .doc(doc_id)
-        .collection('msglist')
-        .withConverter(
-          fromFirestore: MsgContent.fromFirestore,
-          toFirestore: (MsgContent msgContent, options) =>
-              msgContent.toFirestore(),
-        )
-        .orderBy('addTime', descending: true);
-
-    if (state.messageContentList.isNotEmpty) {
-      state.messageContentList.clear();
-    }
-
-    listener = messages.snapshots().listen((event) {
-      for (var change in event.docChanges) {
-        switch (change.type) {
-          case DocumentChangeType.added:
-            if (change.doc.data() != null) {
-              state.messageContentList.insert(0, change.doc.data()!);
-              print(
-                  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ${state.messageContentList}");
-            }
-            break;
-          case DocumentChangeType.modified:
-            break;
-          case DocumentChangeType.removed:
-            break;
-          default:
-        }
-      }
-    }, onError: (error) => print("Listen Faild:  ${error}"));
-  }
+  // @override
+  // Future<void> onReady() async {
+  //   super.onReady();
+  //   print("LOADING MESSAGES.....");
+    
+  // }
 
   @override
   void dispose() {

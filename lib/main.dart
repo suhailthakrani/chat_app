@@ -15,9 +15,9 @@ import 'package:get/get.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Get.putAsync<StorageService>(() => StorageService().init());
- 
+
   Get.put<ConfigStrore>(ConfigStrore());
- 
+
   Get.put(WelcomeController());
   Get.put<UserStore>(UserStore());
 
@@ -34,7 +34,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.INITIAL,
       getPages: AppPages.routes,
