@@ -36,7 +36,7 @@ class WelcomeScreen extends GetView<WelcomeController> {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/test1.jpeg'),
+                        image: AssetImage('assets/images/img2.jpg'),
                         fit: BoxFit.fill),
                   ),
                 ),
@@ -45,7 +45,7 @@ class WelcomeScreen extends GetView<WelcomeController> {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/test2.jpeg'),
+                        image: AssetImage('assets/images/img2.jpg'),
                         fit: BoxFit.fill),
                   ),
                 ),
@@ -54,7 +54,7 @@ class WelcomeScreen extends GetView<WelcomeController> {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/test3.jpeg'),
+                        image: AssetImage('assets/images/img2.jpg'),
                         fit: BoxFit.fill),
                   ),
                   child: Stack(

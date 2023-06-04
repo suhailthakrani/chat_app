@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:chat_app/common/entities/me_list_item.dart';
@@ -8,6 +7,7 @@ import 'package:chat_app/screens/message/state.dart';
 import 'package:chat_app/screens/profile/state.dart';
 import 'package:chat_app/screens/sign_in/index.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:location/location.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -17,12 +17,10 @@ class ProfileController extends GetxController {
   final token = UserStore.to.token;
   final db = FirebaseFirestore.instance;
   final ProfileState state = ProfileState();
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: <String>[
-      'email',
-      'http://www.gogleapis.com/auth/contacts.readonly'
-    ]
-  );
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>[
+    'email',
+    'http://www.gogleapis.com/auth/contacts.readonly'
+  ]);
 
   final ProfileState profileState = ProfileState();
   loadAllData() async {
@@ -33,34 +31,74 @@ class ProfileController extends GetxController {
     }
   }
 
-
   Future<void> logout() async {
-    UserStore.to.onLogOut();
-    await _googleSignIn.signOut();
+    final UserStore userStore = UserStore.to;
+
+    // Sign out from Firebase
+    await FirebaseAuth.instance.signOut();
+
+    // Sign out from Google
+    try {
+      final GoogleSignIn _googleSignIn =
+          GoogleSignIn(scopes: <String>['email', 'profile']);
+      await _googleSignIn.signOut();
+    } catch (e) {
+      print('Error during sign out from Google: $e');
+    }
+
+    // Perform any additional cleanup or state management
+    userStore.onLogOut();
+
+    // Navigate to the sign-in screen
     Get.offAndToNamed(AppRoutes.SIGN_IN);
   }
 
   @override
   void onInit() {
-    
-    
     super.onInit();
     loadAllData();
     List<Map<String, dynamic>> myList = [
-      {"name":"Account", "icon": 'assets/images/profile.png', "route": "/account", },
-      {"name":"Chat", "icon": 'assets/images/profile.png', "route": "/chat", },
-      {"name":"Notification", "icon": 'assets/images/profile.png', "route": "/notification", },
-      {"name":"Privacy", "icon": 'assets/images/profile.png', "route": "/privacy", },
-      {"name":"Help", "icon": 'assets/images/profile.png', "route": "/help", },
-      {"name":"About", "icon": 'assets/images/profile.png', "route": "/about", },
-      {"name":"Logout", "icon": 'assets/images/profile.png', "route": "/logout", },
+      {
+        "name": "Account",
+        "icon": 'assets/images/profile.png',
+        "route": "/account",
+      },
+      {
+        "name": "Chat",
+        "icon": 'assets/images/profile.png',
+        "route": "/chat",
+      },
+      {
+        "name": "Notification",
+        "icon": 'assets/images/profile.png',
+        "route": "/notification",
+      },
+      {
+        "name": "Privacy",
+        "icon": 'assets/images/profile.png',
+        "route": "/privacy",
+      },
+      {
+        "name": "Help",
+        "icon": 'assets/images/profile.png',
+        "route": "/help",
+      },
+      {
+        "name": "About",
+        "icon": 'assets/images/profile.png',
+        "route": "/about",
+      },
+      {
+        "name": "Logout",
+        "icon": 'assets/images/profile.png',
+        "route": "/logout",
+      },
     ];
 
-
     for (var result in myList) {
-      state.meListItem.add(MeListItem.fromMap(result),);
+      state.meListItem.add(
+        MeListItem.fromMap(result),
+      );
     }
   }
- 
 }
-

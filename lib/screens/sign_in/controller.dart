@@ -1,9 +1,9 @@
 import 'package:chat_app/screens/sign_in/index.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-
-GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>['openid']);
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  scopes: <String>['email', 'profile', 'openid'],
+);
 
 class SignInController extends GetxController {
   SignInController();
@@ -12,7 +12,6 @@ class SignInController extends GetxController {
   final db = FirebaseFirestore.instance;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
 
   changePage(int index) async {
     state.index.value = index;
@@ -27,20 +26,30 @@ class SignInController extends GetxController {
   Future<void> handleSignIn() async {
     try {
       var user = await _googleSignIn.signIn();
+      print(";;;;;;;;;;;;;;;");
+      print(']]]]]]]]]]] ${user!.email}, ${user.authentication}');
       if (user != null) {
-
+        user.clearAuthCache();
         final gAuthentication = await user.authentication;
+        print("================= ${gAuthentication}");
         final credential = GoogleAuthProvider.credential(
           idToken: gAuthentication.idToken,
           accessToken: gAuthentication.accessToken,
         );
+
+        print("=------=====-------> ${credential}");
+
         await FirebaseAuth.instance.signInWithCredential(credential);
         String displayName = user.displayName ?? user.email;
         String email = user.email;
         String id = user.id;
         String photoUrl = user.photoUrl ?? '';
         UserModel userProfile = UserModel(
-            displayName: displayName, email: email, accessToken: id, photoUrl: photoUrl);
+            displayName: displayName,
+            email: email,
+            accessToken: id,
+            photoUrl: photoUrl);
+        print("----userProfile---------- ${userProfile}");
         UserStore.to.saveProfile(userProfile);
 
         var userbase = await db
@@ -63,7 +72,7 @@ class SignInController extends GetxController {
             fcmToken: '',
             addTime: Timestamp.now(),
           );
-          var userbase = await db
+          await db
               .collection('users')
               .withConverter(
                 fromFirestore: UserData.fromFirestore,
@@ -73,64 +82,66 @@ class SignInController extends GetxController {
               )
               .add(data);
         }
-        
+
         toastInfo(message: 'login success');
         signIn();
       }
-    } catch (e) {
-      print(e.toString());
-      toastInfo(message: 'login failed');
+    } catch (e, stackTrace) {
+      print('--------------------------------');
+      print('Error: $e');
+      print('Stack trace: $stackTrace');
+      toastInfo(message: 'Login failed');
     }
   }
+
   Future<void> signUp() async {
-  try {
-    UserCredential userCredential =
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    );
-    User? user = userCredential.user;
-    // do something with the user object
-  } on FirebaseAuthException catch (e) {
-    if (e.code == 'weak-password') {
-      print('The password provided is too weak.');
-    } else if (e.code == 'email-already-in-use') {
-      print('The account already exists for that email.');
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      User? user = userCredential.user;
+      // do something with the user object
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
     }
-  } catch (e) {
-    print(e);
   }
-}
 
-Future<void> signInWithEmailAndPassword() async {
-  try {
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    );
-    User? user = userCredential.user;
-    // do something with the user object
-  } on FirebaseAuthException catch (e) {
-    if (e.code == 'user-not-found') {
-      print('No user found for that email.');
-    } else if (e.code == 'wrong-password') {
-      print('Wrong password provided for that user.');
+  Future<void> signInWithEmailAndPassword() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      User? user = userCredential.user;
+      // do something with the user object
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    } catch (e) {
+      print(e);
     }
-  } catch (e) {
-    print(e);
   }
-}
-
 
   // Check whether user is already logged in or not
   @override
   void onReady() {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
-        print('User is currently logged out.');
+        print('--------------------- User is currently logged out.');
       } else {
-        print('User is logged in');
+        print('--------------------- User is logged in');
       }
     });
     super.onReady();

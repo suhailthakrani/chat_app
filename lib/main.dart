@@ -15,7 +15,6 @@ import 'package:get/get.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Get.putAsync<StorageService>(() => StorageService().init());
-
   Get.put<ConfigStrore>(ConfigStrore());
 
   Get.put(WelcomeController());
@@ -33,9 +32,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    UserStore userStore = Get.find<UserStore>();
+
+    String initialRoute =
+        userStore.profile != null ? AppRoutes.SIGN_IN : AppRoutes.INITIAL;
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.INITIAL,
+      initialRoute: initialRoute,
       getPages: AppPages.routes,
     );
   }
