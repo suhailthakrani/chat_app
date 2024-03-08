@@ -55,7 +55,7 @@ class UserModel {
     if (map['displayName'] == null ||
         map['email'] == null ||
         map['accessToken'] == null) {
-      throw FormatException("Missing required properties in JSON string");
+      throw const FormatException("Missing required properties in JSON string");
     }
 
     return UserModel(

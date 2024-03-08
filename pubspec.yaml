@@ -19,8 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
-
+  sdk: '>=2.19.0 <4.0.0'
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -53,7 +52,7 @@ dependencies:
   # Widget to display dots indicator to show a position
   dots_indicator: ^2.1.0
   # The best swiper(carousel) for flutter, with multiple layouts, infinite loop.
-  flutter_swiper: ^1.1.6
+  flutter_swiper_view: ^1.1.8
   # To show progress bar on loading via long scrolling 
   flutter_spinkit: ^5.1.0
   # Flutter plugin for accepting incoming links - App/Deep Links (Android), Universal Links and Custom URL schemes (iOS).
